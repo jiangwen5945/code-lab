@@ -1,0 +1,20 @@
+@import "./normalize.css";
+@import "./screen.css";
+@import "./common.css";
+
+
+
+
+.slide-down {
+  animation: slideDown 2s forwards;
+  /* margin-top: 20px; */
+}
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+    clip-path: inset(100% 0% 0% 0%);
+  }
+  100% {
+    clip-path: inset(0% 0% 0% 0%);
+  }
+}

@@ -1,0 +1,54 @@
+.flex-cc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-vcc {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.page {
+    width: 100%;
+    /* height: 100%; */
+    height: calc(100% - 44px);
+    position: relative;
+}
+
+.page-cell {
+    --line: color-mix(in lch, canvasText 15%, hsl(0 0% 100% / 0.25));
+    position: relative;
+    background-image: linear-gradient(90deg, var(--line), transparent 3%),
+        linear-gradient(360deg, var(--line), transparent 3%);
+    background-size: 30px 30px;
+    background-position: center center;
+    width: 100%;
+    min-height: calc(100% - 44px);
+}
+
+.page-cell2 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    &::before {
+        --size: 30px;
+        --line: color-mix(in lch, canvasText 15%, hsl(0 0% 100% / 0.25));
+        content: "";
+        /* height: 100svh;
+      width: 100vw; */
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background:
+            linear-gradient(90deg, var(--line) 1px, transparent 1px var(--size)) 50% 50% / var(--size) var(--size),
+            linear-gradient(var(--line) 1px, transparent 1px var(--size)) 50% 50% / var(--size) var(--size);
+        mask: linear-gradient(-25deg, transparent 65%, white);
+        top: 0;
+        transform-style: flat;
+        pointer-events: none;
+        z-index: -1;
+    }
+}
