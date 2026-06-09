@@ -28,17 +28,17 @@ export default {
         // 函数：可以动态处理返回
         // postcss-pxtorem 处理每个 CSS 文件的时候都会来调用这个函数
         // 它会把被处理的 CSS 文件相关的信息通过参数传递给该函数
-        'postcss-pxtorem': {
-            mediaQuery: false,
-            minPixelValue: 12,
-            rootValue: 168,
+        '@minko-fe/postcss-pxtorem': {
+            mediaQuery: false, // 不处理媒体查询中的px
+            minPixelValue: 12, // 小于12px的值不转换
+            rootValue: 168, // 设计稿宽度 / 10（如750px设计稿 → 75，Vant建议37.5）
             propList: ['*'],
-            // selectorBlackList: ['norem'], // 忽略所有类名中包含 'norem' 的选择器
+            selectorBlackList: ['norem'], // 忽略所有类名中包含 'norem' 的选择器
             exclude: (file) => {
-                // 排除多个特定路径下的页面
-                return file.includes('src/views/HomeView.vue')
+                // 使用正则表达式精确匹配，兼容Windows/macOS路径格式
+                // return /HomeView\.vue$/.test(file);
+                return file.includes('HomeView')
             }
-
         }
     }
 }
