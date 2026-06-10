@@ -1,10 +1,10 @@
 <template>
     <div class="page-cell flex-cc">
         <div class="card">
-        <div class="front">小土豆🥔
-        </div>
+        <div class="front">猜猜我是谁？</div>
         <div class="back">
             <img src="/src/pages/zendo/assets/imgs/小土豆.png" alt="">
+            <span class="back-text">我是小土豆🥔</span>
         </div>
     </div>
     </div>
@@ -52,10 +52,24 @@
         left: 0;
     }
 
+    .back-text {
+        position: absolute;
+        top: 80%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+        font-size: 60px;
+        text-shadow: 0 2px 12px rgba(0,0,0,.6);
+        z-index: 1;
+        pointer-events: none;
+        white-space: nowrap;
+    }
+
     img{
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
+
 }
 </style>
