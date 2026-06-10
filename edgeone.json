@@ -3,8 +3,12 @@
   "outputDirectory": "dist",
   "rewrites": [
     {
-      "source": "/code-lab/:path*",
-      "destination": "/:path*"
+      "source": "/code-lab",
+      "destination": "/"
+    },
+    {
+      "source": "/code-lab/*",
+      "destination": "/:splat"
     }
   ]
 }
