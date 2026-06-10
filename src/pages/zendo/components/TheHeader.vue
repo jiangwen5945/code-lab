@@ -34,7 +34,12 @@ const handleLink = () => {
 }
 
 const handleBlank = () => {
-    window.open(window.location.href + '/demo', '_blank')
+    const route = router.currentRoute.value
+    const { href } = router.resolve({
+        path: route.path,
+        query: { ...route.query, isOpenedSolo: '1' }
+    })
+    window.open(href, '_blank')
 }
 
 const baseUrl = import.meta.env.BASE_URL
