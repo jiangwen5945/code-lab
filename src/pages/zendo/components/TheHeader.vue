@@ -40,10 +40,7 @@ const handleBlank = () => {
     window.open(window.location.href + '/demo', '_blank')
 }
 
-// 引入图片方法
-const requireImg = (path) => {
-    return new URL(`${path}`, import.meta.url).href
-}
+const baseUrl = import.meta.env.BASE_URL
 
 // 进入全屏
 const setFullScreen = () => { }
@@ -105,7 +102,7 @@ const html = '<a>123</a>'
             </div>
 
             <div class="avatar-box">
-                <el-avatar :src="requireImg('../assets/avatar.jpg')"></el-avatar>
+                <el-avatar :src="`${baseUrl}avatar.jpg`"></el-avatar>
                 <span class="username">jiangwen</span>
             </div>
         </div>
