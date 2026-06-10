@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue';
 import { useZendoStore } from '../stores/zendo.js'
 import ToggleTheme from '@/components/ToggleTheme.vue';
-import { useRouter, useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
 
 const router = useRouter();
 // 获取当前路由
@@ -10,9 +10,6 @@ const breadcrumbs = computed(() => {
     const [_first, ..._breadcrumbs] = router.currentRoute.value.matched
     return router.currentRoute.value.name === '首页' ? _breadcrumbs : [{ name: '首页', path: '/' }, ..._breadcrumbs]
 })
-
-console.log('router.currentRoute', router.currentRoute);
-
 
 const zendoStore = useZendoStore()
 const toggleCollapse = computed(() => zendoStore.toggleCollapse)
