@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        overflow: hidden;
+      }
+
+      .line {
+        display: flex;
+      }
+      .line:not(.line:first-child) {
+        margin-top: -1.8518518519vw;
+      }
+      .line:nth-child(even) {
+        transform: translateX(-5.5555555556vw);
+      }
+      .line .item {
+        flex-shrink: 0;
+        width: 11.1111111111vw;
+        height: 11.1111111111vw;
+        background-color: #000;
+        clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+        transition: 0.5s;
+      }
+      .line .item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.5;
+        transition: 0.5s;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="line">
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+      </div>
+      <div class="line">
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+      </div>
+      <div class="line">
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+      </div>
+      <div class="line">
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+      </div>
+      <div class="line">
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+        <div class="item"><img src="" alt="" /></div>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    // 设置元素图片及鼠标移入移出事件
+    const lines = document.querySelectorAll('.line')
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i]
+      const items = line.querySelectorAll('.item')
+      for (let j = 0; j < items.length; j++) {
+        const item = items[j]
+        const img = item.querySelector('img')
+        img.src = `https://picsum.photos/300?random=${i + '' + j}`
+        item.onmouseenter = function () {
+          img.style.opacity = 1
+          item.style.transform = 'scale(1.3)'
+          scaleAround(i, j, 0.7)
+        }
+        item.onmouseleave = function () {
+          img.style.opacity = 0.5
+          item.style.transform = 'scale(1)'
+          scaleAround(i, j, 1)
+        }
+      }
+    }
+
+    // 处理当前元素周边元素缩放
+    const container = document.querySelector('.container')
+    function scaleAround(i, j, scale) {
+      // 创建一个二维数组存放受影响的元素
+      let itemArr
+      // 如果是偶数列
+      if (i % 2 === 0) {
+        itemArr = [
+          [i - 1, j],
+          [i - 1, j + 1],
+          [i, j - 1],
+          [i, j + 1],
+          [i + 1, j],
+          [i + 1, j + 1]
+        ]
+      }
+      // 如果是奇数列
+      else {
+        itemArr = [
+          [i - 1, j - 1],
+          [i - 1, j],
+          [i, j - 1],
+          [i, j + 1],
+          [i + 1, j - 1],
+          [i + 1, j]
+        ]
+      }
+      // 过滤不存在的元素
+      itemArr = itemArr.map(([i, j]) => container.children[i]?.children[j]).filter(Boolean)
+      // 添加样式
+      for (const item of itemArr) {
+        item.style.transform = `scale(${scale})`
+      }
+    }
+  </script>
+</html>
