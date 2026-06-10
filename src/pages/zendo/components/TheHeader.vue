@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue';
 import { useZendoStore } from '../stores/zendo.js'
 import ToggleTheme from '@/components/ToggleTheme.vue';
-import { useRouter, useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
 
 const router = useRouter();
 // 获取当前路由
@@ -37,7 +37,12 @@ const handleLink = () => {
 }
 
 const handleBlank = () => {
-    window.open(window.location.href + '/demo', '_blank')
+    const route = router.currentRoute.value
+    const { href } = router.resolve({
+        path: route.path,
+        query: { ...route.query, isOpenedSolo: 'true' }
+    })
+    window.open(href, '_blank')
 }
 
 const baseUrl = import.meta.env.BASE_URL
