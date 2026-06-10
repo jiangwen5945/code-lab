@@ -1,0 +1,1 @@
+import{_ as t,d as s,F as o,j as _,o as a,e as r,t as c,f as n}from"./index-CK-eJ_np.js";const d={},i={class:"container"};function l(f,m){return a(),s("div",i,[(a(),s(o,null,_(93,e=>r("div",{class:n(["demo_box","shadow_"+e]),key:e},"第"+c(e)+"个盒子",3)),64))])}const u=t(d,[["render",l],["__scopeId","data-v-89fa05c5"]]);export{u as default};
