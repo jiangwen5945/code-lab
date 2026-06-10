@@ -27,19 +27,19 @@ const works = [
     title: 'xiamao-mall',
     desc: '电商网站',
     img: `${baseUrl}img/work/item-4.webp`,
-    url: 'https://xiamao-mall-dpglf8j19jst.edgeone.dev'
+    url: 'https://xiamao-mall.pages.dev/#/'
   },
   {
     title: 'cat-admin',
     desc: '后台管理系统',
     img: `${baseUrl}img/work/item-3.webp`,
-    url: 'https://cat-admin-oy4joqna.edgeone.dev'
+    url: 'https://xiamao-admin.pages.dev/#/'
   },
   {
     title: 'live-dashboard',
     desc: '实时数据大屏展示',
     img: `${baseUrl}img/work/item-5.webp`,
-    url: 'https://view-panel-6zgyoia9.edgeone.cool'
+    url: 'https://xiamao-dashboard.pages.dev/#/'
   }
 ]
 
