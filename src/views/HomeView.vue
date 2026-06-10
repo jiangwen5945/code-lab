@@ -1,6 +1,8 @@
 <script setup>
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 
+const baseUrl = import.meta.env.BASE_URL
+
 const preloaderHide = ref(false)
 
 const typewriterText = ref('')
@@ -12,31 +14,31 @@ const works = [
   {
     title: 'code-lab',
     desc: '代码实验室',
-    img: '/img/work/item-1.webp',
-    url: '/zendo'
+    img: `${baseUrl}img/work/item-1.webp`,
+    url: `${baseUrl}zendo`
   },
   {
     title: 'my-blog',
     desc: '个人博客',
-    img: '/img/work/item-2.webp',
+    img: `${baseUrl}img/work/item-2.webp`,
     url: 'https://jiangwen.site/blog'
   },
   {
     title: 'xiamao-mall',
     desc: '电商网站',
-    img: '/img/work/item-4.webp',
+    img: `${baseUrl}img/work/item-4.webp`,
     url: 'https://xiamao-mall-dpglf8j19jst.edgeone.dev'
   },
   {
     title: 'cat-admin',
     desc: '后台管理系统',
-    img: '/img/work/item-3.webp',
+    img: `${baseUrl}img/work/item-3.webp`,
     url: 'https://cat-admin-oy4joqna.edgeone.dev'
   },
   {
     title: 'live-dashboard',
     desc: '实时数据大屏展示',
-    img: '/img/work/item-5.webp',
+    img: `${baseUrl}img/work/item-5.webp`,
     url: 'https://view-panel-6zgyoia9.edgeone.cool'
   }
 ]
