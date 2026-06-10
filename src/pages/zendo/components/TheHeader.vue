@@ -14,11 +14,8 @@ const breadcrumbs = computed(() => {
 console.log('router.currentRoute', router.currentRoute);
 
 
-// const { toggleCollapse, isCollapse, toggleFullScreen, isFullScreen } = useZendoStore()
-
 const zendoStore = useZendoStore()
 const toggleCollapse = computed(() => zendoStore.toggleCollapse)
-const toggleFullScreen = computed(() => zendoStore.toggleFullScreen)
 const toggleBlurView = computed(() => zendoStore.toggleBlurView)
 
 const isShowMsgPannel = ref(false)
@@ -47,8 +44,6 @@ const handleBlank = () => {
 
 const baseUrl = import.meta.env.BASE_URL
 
-// 进入全屏
-const setFullScreen = () => { }
 const html = '<a>123</a>'
 </script>
 
@@ -73,13 +68,6 @@ const html = '<a>123</a>'
             <div class="icon-box" @click="handleBlank">
                 <el-icon>
                     <Monitor />
-                </el-icon>
-            </div>
-
-            <div class="full-box icon-box" @click="toggleFullScreen">
-                <el-icon>
-                    <Crop v-if="zendoStore.isFullScreen" />
-                    <FullScreen v-else />
                 </el-icon>
             </div>
 
