@@ -2,13 +2,10 @@
 import Sidebar from '../components/Sidebar.vue';
 import TheHeader from '../components/TheHeader.vue';
 import CommonTag from '../components/CommonTag.vue'
-import { onBeforeRouteUpdate, onBeforeRouteLeave, useRoute, RouterView } from 'vue-router';
+import { onBeforeRouteUpdate, onBeforeRouteLeave, RouterView } from 'vue-router';
 import { computed } from 'vue';
 import { useZendoStore } from '../stores/zendo.js'
 import { KeepAlive } from 'vue';
-
-const route = useRoute()
-const isSolo = computed(() => route.query.isOpenedSolo === 'true')
 
 const zendoStore = useZendoStore()
 const isBlurView = computed(() => zendoStore.isBlurView)
@@ -37,13 +34,7 @@ export default {
 
 
 <template>
-  <template v-if="isSolo">
-    <router-view v-slot="{ Component }">
-      <component :is="Component" />
-    </router-view>
-  </template>
-
-  <el-container v-else class="contaier">
+  <el-container class="contaier">
     <el-aside width="auto">
       <Sidebar />
     </el-aside>

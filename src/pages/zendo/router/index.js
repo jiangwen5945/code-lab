@@ -24,6 +24,14 @@ const routes = [
       // return false
     }
   },
+  // 设置页面单独页面打开
+  ...menuList.map((e) => {
+    return {
+      ...e,
+      name:  e.name + '_demo',
+      path:  e.path + '/demo',
+    }
+  })
 ]
 
 console.log('routes', routes)
