@@ -18,7 +18,7 @@
 
 <style lang="scss" scoped>
 // @import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap');
-@import url('../../assets/fonts/googleapis.css');
+// @import url('../../assets/fonts/googleapis.css');
 .t {
     font-family: "Ma Shan Zheng", cursive;
     font-size: 50px;
