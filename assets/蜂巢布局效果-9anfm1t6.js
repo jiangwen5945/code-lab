@@ -1,1 +1,0 @@
-import{_ as t,o,d as r,e as s}from"./index-DO3qKK4b.js";const _={},c={class:"page-cell"};function a(n,e){return o(),r("div",c,e[0]||(e[0]=[s("iframe",{src:"/honeycomb.html",frameborder:"0",style:{height:"100%",width:"100%"}},null,-1)]))}const d=t(_,[["render",a]]);export{d as default};
