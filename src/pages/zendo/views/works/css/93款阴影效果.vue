@@ -9,6 +9,7 @@
     >
       <span class="shadow-number">#{{ i + 1 }}</span>
       <span v-if="copiedIndex === i" class="copied-badge">已复制</span>
+      <span class="copy-icon"><CopyDocument style="width: 32px; height: 32px;" /></span>
     </div>
 
   </div>
@@ -172,10 +173,23 @@ function copyShadow(index, shadow) {
   animation: fadeIn 0.2s ease;
 }
 
+.copy-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ccc;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.shadow-card:hover .copy-icon {
+  opacity: 1;
+}
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-4px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-
-
 </style>
