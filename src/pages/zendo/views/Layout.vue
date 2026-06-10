@@ -43,7 +43,13 @@ export default {
 
 
 <template>
-  <el-container class="contaier">
+  <template v-if="isSolo">
+    <router-view v-slot="{ Component }">
+      <component :is="Component" />
+    </router-view>
+  </template>
+
+  <el-container v-else class="contaier">
     <el-aside width="auto">
       <Sidebar />
     </el-aside>
