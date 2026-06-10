@@ -39,7 +39,6 @@ export const useZendoStore = defineStore('zendo', {
     return {
       isCollapse: false,
       isDark: false,
-      isFullScreen: false,
       isBlurView: false,
       menuList,
       notes: '123',
@@ -68,43 +67,6 @@ export const useZendoStore = defineStore('zendo', {
       this.isDark = !this.isDark
       document.documentElement.classList.toggle('dark')
       console.log('toggleTheme')
-    },
-
-    // 切换全屏
-    toggleFullScreen() {
-      this.toggleCollapse('collapse')
-      this.isFullScreen = !this.isFullScreen
-      if (!this.isFullScreen) {
-        document.exitFullScreen && document.exitFullscreen()
-        //兼容火狐
-        if (document.mozCancelFullScreen) {
-          document.mozCancelFullScreen()
-        }
-        //兼容谷歌等
-        if (document.webkitExitFullscreen) {
-          document.webkitExitFullscreen()
-        }
-        //兼容IE
-        if (document.msExitFullscreen) {
-          document.msExitFullscreen()
-        }
-      } else {
-        if (document.documentElement.RequestFullScreen) {
-          document.documentElement.RequestFullScreen()
-        }
-        //兼容火狐
-        if (document.documentElement.mozRequestFullScreen) {
-          document.documentElement.mozRequestFullScreen()
-        }
-        //兼容谷歌等可以webkitRequestFullScreen也可以webkitRequestFullscreen
-        if (document.documentElement.webkitRequestFullScreen) {
-          document.documentElement.webkitRequestFullScreen()
-        }
-        //兼容IE,只能写msRequestFullscreen
-        if (document.documentElement.msRequestFullscreen) {
-          document.documentElement.msRequestFullscreen()
-        }
-      }
     },
 
     // 切换内容模糊
