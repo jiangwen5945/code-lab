@@ -1,0 +1,1 @@
+import{_ as s,o as _,d as a,e}from"./index-DO3qKK4b.js";const o={},t={class:"page-cell flex-cc"};function n(r,c){return _(),a("div",t,c[0]||(c[0]=[e("div",{class:"box"},[e("div",{class:"inner"},[e("div",{class:"container flex-cc"},"保持宽高比")])],-1)]))}const l=s(o,[["render",n],["__scopeId","data-v-cc893f76"]]);export{l as default};

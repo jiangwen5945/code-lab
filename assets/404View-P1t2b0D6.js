@@ -1,1 +1,0 @@
-import{_ as o,d as s,e as t,o as a}from"./index-CK-eJ_np.js";const c={},n={class:"container"};function _(r,e){return a(),s("div",n,e[0]||(e[0]=[t("div",{class:"text__box one"},"给时间以生命，给岁月以文明!",-1)]))}const f=o(c,[["render",_],["__scopeId","data-v-18f25f72"]]);export{f as default};

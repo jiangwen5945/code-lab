@@ -1,0 +1,1 @@
+import{_ as t,o as s,d as a,F as o,j as _,e as r,t as c,f as n}from"./index-DO3qKK4b.js";const d={},i={class:"container"};function l(f,m){return s(),a("div",i,[(s(),a(o,null,_(93,e=>r("div",{class:n(["demo_box","shadow_"+e]),key:e},"第"+c(e)+"个盒子",3)),64))])}const u=t(d,[["render",l],["__scopeId","data-v-89fa05c5"]]);export{u as default};
