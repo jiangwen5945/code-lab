@@ -596,6 +596,16 @@ onUnmounted(() => {
   li {
     font-size: min(5.333vw, 24px);
     line-height: 3.4em;
+    cursor: pointer;
+    transition: transform 0.25s ease;
+
+    &:hover {
+      transform: translateX(6px);
+
+      .el-icon {
+        animation: service-icon-bounce 0.4s ease;
+      }
+    }
 
     .icon-circle {
       display: inline-flex;
@@ -615,6 +625,12 @@ onUnmounted(() => {
       }
     }
   }
+}
+
+@keyframes service-icon-bounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
 }
 
 /* 作品 */
@@ -859,10 +875,14 @@ onUnmounted(() => {
       line-height: 2.92em;
       display: inline-flex;
       align-items: center;
-      padding: 0 2.2em;
+      padding: 0 3.2em;
+      font-size: 4vw;
 
       &:active {
         transform: scale(0.95);
+      }
+      &.scrolled-hover, &:hover {
+        transform: rotate(0);
       }
     }
   }
@@ -875,6 +895,12 @@ onUnmounted(() => {
     line-height: 3em;
     display: flex;
     align-items: center;
+    cursor: pointer;
+    transition: transform 0.25s ease;
+
+    &:hover {
+      transform: translateX(4px);
+    }
 
     .icon-circle {
       width: 2.8em;
