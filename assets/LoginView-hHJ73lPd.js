@@ -1,1 +1,0 @@
-import{_ as o,d as s,e as t,o as n}from"./index-CK-eJ_np.js";const a={},c={class:"container"};function r(_,e){return n(),s("div",c,e[0]||(e[0]=[t("div",{class:"text__box one"},"登录页建设中.................",-1)]))}const i=o(a,[["render",r],["__scopeId","data-v-78934981"]]);export{i as default};

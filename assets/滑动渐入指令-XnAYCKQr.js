@@ -1,1 +1,0 @@
-import{_ as c,d as s,F as r,j as _,o as t,ad as i,e as o,h as n,t as d,a_ as l}from"./index-CK-eJ_np.js";const p={},v={class:"page-cell"};function f(m,u){const a=l("slide-in");return t(),s("div",v,[(t(),s(r,null,_(10,e=>i(o("div",{class:"item",key:e},[n(d(e),1)]),[[a]])),64))])}const x=c(p,[["render",f],["__scopeId","data-v-48cd41b5"]]);export{x as default};
