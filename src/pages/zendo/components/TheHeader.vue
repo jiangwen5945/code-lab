@@ -19,18 +19,8 @@ const isShowMsgPannel = ref(false)
 const handleMsg = () => {
     isShowMsgPannel.value = !isShowMsgPannel.value
 }
-const handleLink = () => {
-    console.log('handleLink', router.currentRoute.value.meta.code);
-    let path = router.currentRoute.value.meta.code
-    if (path && path.indexOf('http') !== -1) {
-        window.open(path, '_blank')
-    }
-    else {
-        router.push(path)
-    }
-}
 
-const handleBlank = () => {
+const handleLink = () => {
     const route = router.currentRoute.value
     const { href } = router.resolve({
         path: route.path,
@@ -62,21 +52,15 @@ const html = '<a>123</a>'
         </div>
 
         <div class="rbox">
-            <div class="icon-box" @click="handleBlank">
+            <div class="icon-box" @click="handleLink">
                 <el-icon>
-                    <Monitor />
+                    <Link />
                 </el-icon>
             </div>
 
             <div class="bell-box icon-box" @click="handleMsg">
                 <el-icon>
                     <Edit />
-                </el-icon>
-            </div>
-
-            <div class="icon-box" @click="handleLink">
-                <el-icon>
-                    <Link />
                 </el-icon>
             </div>
 
