@@ -23,18 +23,9 @@ const routes = [
       console.log('路由独享的守卫 - beforeEnter')
       // return false
     }
-  },
-  // 设置页面单独页面打开
-  // ...menuList.map((e) => {
-  //   return {
-  //     ...e,
-  //     name:  e.name + '_demo',
-  //     path:  e.path + '/demo',
-  //   }
-  // })
+  }
 ]
 
-console.log('routes', routes)
 // let mockRoutes = handleMenulist(mockMenuList)
 const router = createRouter({
   // history: createWebHistory(import.meta.env.BASE_path),
