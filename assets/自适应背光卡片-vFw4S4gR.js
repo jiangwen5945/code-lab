@@ -1,4 +1,4 @@
-import{u as c}from"./zendo-DqaD5UJI.js";import{_ as e,e as t,f as o,o as n}from"./index-B5A7OHNV.js";const s={class:"page-cell flex-cc"},r={cover:"https://iili.io/Jq9GrUg.gif",link:"https://juejin.cn/post/7262007830721413180",date:"2023-09-09",info:`根据图片本身颜色进行自适应背光效果。
+import{u as c}from"./zendo-Ch8n-KrV.js";import{_ as e,e as t,f as o,o as n}from"./index-B5A7OHNV.js";const s={class:"page-cell flex-cc"},r={cover:"https://iili.io/Jq9GrUg.gif",link:"https://juejin.cn/post/7262007830721413180",date:"2023-09-09",info:`根据图片本身颜色进行自适应背光效果。
   知识点：
   1. background的简写形式：在CSS2.1里，background属性的简写方式包含五种属性值，从CSS3开始，又增加了3个新的属性值，加起来一共8个。
     background: 
