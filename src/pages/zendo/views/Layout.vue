@@ -17,7 +17,6 @@ watch(() => route.name, (name) => {
 }, { immediate: true })
 
 const zendoStore = useZendoStore()
-const isBlurView = computed(() => zendoStore.isBlurView)
 
 // 在当前路由改变，但是该组件被复用时调用
 onBeforeRouteUpdate((to, from) => {
@@ -60,7 +59,7 @@ export default {
       </el-header>
 
 
-      <el-main :class="[isBlurView ? 'blur-main' : 'main']" ref="main">
+      <el-main class="main" ref="main">
        <common-tag />
 
         <router-view v-slot="{ Component }">
@@ -105,10 +104,5 @@ export default {
   .v-leave-to {
     opacity: 0;
   }
-}
-
-.blur-main {
-  padding: 0 20px 20px 20px;
-  filter: blur(6px);
 }
 </style>

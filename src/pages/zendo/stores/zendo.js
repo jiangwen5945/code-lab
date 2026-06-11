@@ -39,7 +39,7 @@ export const useZendoStore = defineStore('zendo', {
     return {
       isCollapse: false,
       isDark: false,
-      isBlurView: false,
+
       menuList,
       notes: '123',
       navList: [
@@ -69,12 +69,6 @@ export const useZendoStore = defineStore('zendo', {
       console.log('toggleTheme')
     },
 
-    // 切换内容模糊
-    toggleBlurView() {
-      console.log('toggleBlurView');
-      
-      this.isBlurView = !this.isBlurView
-    },
 
     // 更新导航栏数组数据
     updateNavList(item) {
