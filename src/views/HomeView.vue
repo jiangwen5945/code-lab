@@ -27,19 +27,19 @@ const works = [
     title: 'xiamao-mall',
     desc: '电商网站',
     img: `${baseUrl}img/work/item-4.webp`,
-    url: 'https://xiamao-mall.pages.dev/#/'
+    url: 'https://xiamao-mall.jiangwen.site'
   },
   {
-    title: 'cat-admin',
+    title: 'xiamao-admin',
     desc: '后台管理系统',
     img: `${baseUrl}img/work/item-3.webp`,
-    url: 'https://xiamao-admin.pages.dev/#/'
+    url: 'https://xiamao-admin.jiangwen.site'
   },
   {
     title: 'live-dashboard',
     desc: '实时数据大屏展示',
     img: `${baseUrl}img/work/item-5.webp`,
-    url: 'https://xiamao-dashboard.pages.dev/#/'
+    url: 'https://xiamao-dashboard.jiangwen.site'
   }
 ]
 
