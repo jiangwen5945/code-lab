@@ -16,7 +16,7 @@ const works = [
     desc: '代码实验室',
     img: `${baseUrl}img/work/item-1.webp`,
     url: `${baseUrl}zendo`,
-    platforms: ['app']
+    platforms: ['pc']
   },
   {
     title: 'my-blog',
