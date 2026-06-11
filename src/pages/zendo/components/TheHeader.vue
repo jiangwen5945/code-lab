@@ -3,6 +3,7 @@ import { computed, ref } from 'vue';
 import { useZendoStore } from '../stores/zendo.js'
 import ToggleTheme from '@/components/ToggleTheme.vue';
 import { useRouter } from 'vue-router'
+import CodeDrawer from './CodeDrawer.vue'
 
 const router = useRouter();
 // 获取当前路由
@@ -13,7 +14,6 @@ const breadcrumbs = computed(() => {
 
 const zendoStore = useZendoStore()
 const toggleCollapse = computed(() => zendoStore.toggleCollapse)
-const toggleBlurView = computed(() => zendoStore.toggleBlurView)
 
 const isShowMsgPannel = ref(false)
 const handleMsg = () => {
@@ -21,17 +21,15 @@ const handleMsg = () => {
 }
 
 const handleLink = () => {
-    const route = router.currentRoute.value
+    const _route = router.currentRoute.value
     const { href } = router.resolve({
-        path: route.path,
-        query: { ...route.query, isOpenedSolo: '1' }
+        path: _route.path,
+        query: { ..._route.query, isOpenedSolo: '1' }
     })
     window.open(href, '_blank')
 }
 
 const baseUrl = import.meta.env.BASE_URL
-
-const html = '<a>123</a>'
 </script>
 
 <template>
@@ -64,13 +62,6 @@ const html = '<a>123</a>'
                 </el-icon>
             </div>
 
-            <div class="bell-box icon-box" @click="toggleBlurView">
-                <el-icon>
-                    <View v-if="zendoStore.isBlurView" />
-                    <Hide v-else />
-                </el-icon>
-            </div>
-
             <div class="theme-box">
                 <ToggleTheme />
             </div>
@@ -81,13 +72,9 @@ const html = '<a>123</a>'
             </div>
         </div>
 
-        <div class="msg-pannel el-card" :class="isShowMsgPannel ? 'msg-pannel__show' : ''">
-            <!-- {{ zendoStore.notes }} -->
-            <!-- {{ router.currentRoute.value.meta.info }} -->
-            <div v-html="html"></div>
-        </div>
-
     </div>
+
+    <CodeDrawer v-model="isShowMsgPannel" />
 </template>
 
 <style lang="scss" scoped>
@@ -154,24 +141,6 @@ const html = '<a>123</a>'
         }
     }
 
-    .msg-pannel {
-        width: 300px;
-        height: calc(100% - 59px);
-        position: absolute;
-        right: -300px;
-        top: 59px;
-        z-index: 99;
-        transition: all .5s ease-in-out;
-        // background: #fff;
-        // color: #000;
-        text-align: center;
-        padding: 20px 10px;
-        opacity: 0;
-    }
 
-    .msg-pannel__show {
-        right: 0;
-        opacity: .9;
-    }
 }
 </style>
