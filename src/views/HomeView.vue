@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
 
 const baseUrl = import.meta.env.BASE_URL
 
@@ -15,33 +15,85 @@ const works = [
     title: 'code-lab',
     desc: '代码实验室',
     img: `${baseUrl}img/work/item-1.webp`,
-    url: `${baseUrl}zendo`
+    url: `${baseUrl}zendo`,
+    platforms: ['app']
   },
   {
     title: 'my-blog',
     desc: '个人博客',
     img: `${baseUrl}img/work/item-2.webp`,
-    url: 'https://jiangwen.site/blog'
+    url: 'https://jiangwen.site/blog',
+    platforms: ['pc', 'app']
   },
   {
     title: 'xiamao-mall',
     desc: '电商网站',
     img: `${baseUrl}img/work/item-4.webp`,
-    url: 'https://xiamao-mall.jiangwen.site'
+    url: 'https://xiamao-mall.jiangwen.site',
+    platforms: ['pc']
   },
   {
     title: 'xiamao-admin',
     desc: '后台管理系统',
     img: `${baseUrl}img/work/item-3.webp`,
-    url: 'https://xiamao-admin.jiangwen.site'
+    url: 'https://xiamao-admin.jiangwen.site',
+    platforms: ['pc']
   },
   {
     title: 'live-dashboard',
     desc: '实时数据大屏展示',
     img: `${baseUrl}img/work/item-5.webp`,
-    url: 'https://xiamao-dashboard.jiangwen.site'
+    url: 'https://xiamao-dashboard.jiangwen.site',
+    platforms: ['pc']
   }
 ]
+
+const isMobile = ref(window.innerWidth < 768)
+const deviceType = computed(() => (isMobile.value ? 'app' : 'pc'))
+
+function isMatched(item) {
+  return item.platforms.includes(deviceType.value)
+}
+
+const breakpointHandler = () => {
+  isMobile.value = window.innerWidth < 768
+}
+
+function showToast(msg) {
+  const el = document.createElement('div')
+  el.textContent = msg
+  Object.assign(el.style, {
+    position: 'fixed',
+    zIndex: '999999',
+    top: '45%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    padding: '10px 24px',
+    borderRadius: '8px',
+    background: 'rgba(0,0,0,0.75)',
+    color: '#fff',
+    fontSize: '14px',
+    fontFamily: 'var(--font-primary, serif)',
+    whiteSpace: 'nowrap',
+    opacity: '0',
+    transition: 'opacity 0.3s ease'
+  })
+  document.body.appendChild(el)
+  requestAnimationFrame(() => { el.style.opacity = '1' })
+  setTimeout(() => {
+    el.style.opacity = '0'
+    setTimeout(() => el.remove(), 300)
+  }, 2500)
+}
+
+function handleWorkClick(item) {
+  if (isMatched(item)) {
+    window.open(item.url, '_blank')
+    return
+  }
+  const target = isMobile.value ? '电脑' : '手机'
+  showToast(`请在${ target }端打开此项目`)
+}
 
 const services = [
   { icon: 'Monitor', label: 'Vue 前端开发' },
@@ -142,6 +194,8 @@ onMounted(() => {
     { threshold: 0.3 }
   )
 
+  window.addEventListener('resize', breakpointHandler)
+
   nextTick(() => {
     document.querySelectorAll('.scroll-animated-from-right').forEach((el) => {
       observer.observe(el)
@@ -162,6 +216,7 @@ onUnmounted(() => {
   if (observer) {
     observer.disconnect()
   }
+  window.removeEventListener('resize', breakpointHandler)
 })
 </script>
 
@@ -210,7 +265,7 @@ onUnmounted(() => {
           <h3 class="headline scroll-animated-from-right">我的作品</h3>
           <div class="showcase">
             <div v-for="item in works" :key="item.title" class="item scroll-animated-from-right">
-              <a :href="item.url" target="_blank">
+              <div :class="'work-link'" @click="handleWorkClick(item)">
                 <div class="info">
                   <div class="container-mid">
                     <h5>{{ item.title }}</h5>
@@ -221,7 +276,12 @@ onUnmounted(() => {
                   class="background-image"
                   :style="{ backgroundImage: `url(${item.img})` }"
                 ></div>
-              </a>
+              </div>
+              <div class="device-badges">
+                <span v-for="p in item.platforms" :key="p" class="badge">
+                  {{ p === 'pc' ? 'PC' : 'App' }}
+                </span>
+              </div>
             </div>
           </div>
         </section>
@@ -282,7 +342,8 @@ onUnmounted(() => {
     font-size: min(4.8vw, 21.6px);
   }
 
-  a {
+  a,
+  .work-link {
     cursor: pointer;
     transition: all 300ms ease;
     text-decoration: none;
@@ -618,6 +679,31 @@ onUnmounted(() => {
     background-position: center;
     background-size: cover;
   }
+
+  .device-badges {
+    position: absolute;
+    z-index: 200;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    gap: 6px;
+
+    .badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-family: var(--font-primary);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      line-height: 1.6;
+      border: 1.5px solid rgba(255, 255, 255, 0.8);
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(4px);
+    }
+
+  }
 }
 
 /* 滚动显现 */
@@ -786,6 +872,17 @@ onUnmounted(() => {
 
   #work .showcase .item {
     margin-bottom: 3vh;
+
+    .device-badges {
+      top: 8px;
+      right: 8px;
+
+      .badge {
+        font-size: 10px;
+        padding: 1px 8px;
+      }
+    }
+
     .info {
       bottom: 0;
       left: 0;
