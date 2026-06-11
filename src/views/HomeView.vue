@@ -103,9 +103,12 @@ const services = [
   { icon: 'Refresh', label: '优化与重构' }
 ]
 
+const scrolledPastThreshold = ref(false)
+
 let mouseMoveHandler = null
 let mouseLeaveHandler = null
 let scrollHandler = null
+let desktopScrollHandler = null
 let observer = null
 
 function smoothScroll(e, targetId) {
@@ -166,6 +169,12 @@ onMounted(() => {
     }
     document.addEventListener('mousemove', mouseMoveHandler)
     document.documentElement.addEventListener('mouseleave', mouseLeaveHandler)
+
+    desktopScrollHandler = () => {
+      scrolledPastThreshold.value = window.scrollY > 100
+    }
+    desktopScrollHandler()
+    window.addEventListener('scroll', desktopScrollHandler)
   } else {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (!prefersReducedMotion) {
@@ -213,6 +222,9 @@ onUnmounted(() => {
   if (scrollHandler) {
     window.removeEventListener('scroll', scrollHandler)
   }
+  if (desktopScrollHandler) {
+    window.removeEventListener('scroll', desktopScrollHandler)
+  }
   if (observer) {
     observer.disconnect()
   }
@@ -244,7 +256,11 @@ onUnmounted(() => {
               </p>
             </div>
             <div class="animation-container animation-fade-up" data-animation-delay="600">
-              <a href="#work" class="smooth-scroll" @click="smoothScroll($event, '#work')">
+              <a
+                href="#work"
+                :class="['smooth-scroll', { 'scrolled-hover': scrolledPastThreshold }]"
+                @click="smoothScroll($event, '#work')"
+              >
                 个人作品集<el-icon><ArrowDown /></el-icon>
               </a>
             </div>
@@ -471,6 +487,7 @@ onUnmounted(() => {
       margin-bottom: 2.2em;
       position: relative;
       padding: 0 1.8em;
+      min-height: 7em;
 
       &::before {
         content: '\201C';
@@ -493,7 +510,7 @@ onUnmounted(() => {
       border-radius: 100px;
       background: var(--color-dark);
 
-      &:hover {
+      &.scrolled-hover, &:hover {
         transform: rotate(15deg);
       }
 
