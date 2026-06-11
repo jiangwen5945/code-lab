@@ -3,7 +3,7 @@
     <el-tag
       v-for="(item, index) in navList" 
       :key="item.name" 
-      :effect="item.path === currentRoute ? 'dark' : ''" 
+      :effect="item.path === currentRoute ? 'dark' : 'light'" 
       :closable="item.path !== '/home'"
       @close="handleClose(item, index)" 
       @click="changeMenu(item)"
