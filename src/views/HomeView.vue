@@ -65,7 +65,7 @@ function showToast(msg) {
   Object.assign(el.style, {
     position: 'fixed',
     zIndex: '999999',
-    top: '45%',
+    top: isMobile.value ? '10%' : '45%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     padding: '10px 24px',
@@ -171,7 +171,7 @@ onMounted(() => {
     document.documentElement.addEventListener('mouseleave', mouseLeaveHandler)
 
     desktopScrollHandler = () => {
-      scrolledPastThreshold.value = window.scrollY > 100
+      scrolledPastThreshold.value = window.scrollY > 200 && window.scrollY < 400
     }
     desktopScrollHandler()
     window.addEventListener('scroll', desktopScrollHandler)
