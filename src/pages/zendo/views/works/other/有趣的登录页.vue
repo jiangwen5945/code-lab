@@ -515,8 +515,7 @@ onUnmounted(() => {
 
 .page {
   display: grid;
-  min-height: 100vh;
-  max-height: 100vh;
+  height: 100vh;
   overflow: hidden;
 }
 
@@ -673,7 +672,7 @@ onUnmounted(() => {
 .mobile-logo-icon svg { width: 100%; height: 100%; }
 
 .form-header { text-align: center; margin-bottom: 40px; }
-.form-header h1 { font-size: 30px; font-weight: 800; letter-spacing: -0.025em; margin-bottom: 8px; }
+.form-header h1 { font-size: 30px; font-weight: 800; letter-spacing: -0.025em; margin-bottom: 8px; color: #fff }
 .form-header p { color: #a1a1aa; font-size: 14px; }
 
 .form { display: flex; flex-direction: column; gap: 20px; }
