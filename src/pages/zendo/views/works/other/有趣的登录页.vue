@@ -47,7 +47,7 @@
             <path d="M2 12l10 5 10-5" />
           </svg>
         </span>
-        CareerCompass
+        XiaMao
       </a>
 
       <div class="chart-area" ref="chartAreaRef">
