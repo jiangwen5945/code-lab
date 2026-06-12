@@ -1,3 +1,19 @@
+<!--
+核心逻辑：
+
+1. 主要 CSS 技术/视觉机制
+   - 利用 clip-path: polygon() 将文字切割为左、中、右 3 片
+   - <span> 保留中间片，::before/::after 通过 content: attr(data-text) 复制文字作为左右片
+   - hover 时三片段向不同方向平移（左片 -20px、右片 +10px），呈现碎裂散开效果
+2. 交互方式
+   - hover 触发碎裂动画，同时整体容器轻微旋转 -0.5deg
+3. 结构要点
+   - h1[data-text] 包含 <span>（中间片），::before（左片），::after（右片）
+   - 三个 clip-path 多边形精确拼接覆盖完整文字区域
+4. 其他要点
+   - text-shadow 和 filter: blur(0.007em) 增加文字质感
+   - user-select: none 防止选中，white-space: nowrap 防止换行破坏裁剪
+-->
 <template>
   <div class="page-cell flex-cc">
     <h1 data-text="black mirror">

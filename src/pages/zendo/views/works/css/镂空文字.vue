@@ -1,10 +1,24 @@
+<!--
+核心逻辑：
+
+1. 主要 CSS 技术/视觉机制
+   - 通过 CSS mask 将 SVG 图标作为遮罩施加在背景山川图片上，使背景仅通过图标区域显示
+   - @keyframes move 平移 background-position（0 → 100% → 0），产生云雾流动动画
+   - filter: brightness(1.3) 提升整体亮度
+2. 交互方式
+   - 纯 CSS 自动播放动画
+3. 结构要点
+   - 单个 .mask 元素，集背景图片、mask 遮罩、动画于一体
+4. 其他要点
+   - mask 引用外部 SVG URL，mask-size: cover 自适应填充
+   - background-size: cover 确保背景图片完整覆盖
+-->
 <script>
 export default {
   link: 'https://github.com/chokcoco/iCSS/issues/80',
   cover:'https://iili.io/JqJOTfj.png'
 }
 </script>
-
 <template>
   <div class="page-cell flex-cc">
     <div class="mask"></div>

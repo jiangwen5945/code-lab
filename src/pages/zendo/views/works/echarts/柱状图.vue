@@ -1,3 +1,17 @@
+<!--
+核心逻辑：
+
+1. 柱状图展示商品销量
+   - 使用 ECharts bar 系列，x 轴为商品名称（衬衫、羊毛衫等），y 轴为销量数值
+   - 柱体顶部设圆角 borderRadius: [5, 5, 0, 0]
+2. 选中交互
+   - selectedMode: true 支持点击选中柱子，选中后带阴影高亮效果
+   - select.itemStyle 配置 shadowColor/shadowBlur 增强视觉反馈
+3. 数据流
+   - 数据为硬编码静态数组 [5, 20, 36, 10, 10, 20]
+4. 其他要点
+   - 监听 window.resize 实现图表自适应
+-->
 <template>
     <div class="page">
         <div class="echarts-container" ref="chart"></div>

@@ -1,3 +1,22 @@
+<!--
+核心逻辑：
+
+1. 主要 CSS 技术/视觉机制
+   - CSS Grid 18 列布局（grid-template-columns: repeat(18, 1fr)），每个 <li> 通过 nth-of-type 精确定位网格位置
+   - 镧系/锕系元素另起两行（第 9、10 行），通过 grid-area 精确放置
+   - 按化学类别（碱金属、卤素等）使用不同背景色区分
+2. 交互方式
+   - radio 筛选组通过 :has() + :checked 选择器控制非选中类别 opacity: 0.2
+   - hover 时元素 scale 放大 + box-shadow 高亮
+   - "Heisenberg" 彩蛋模式：高亮 Br(35) 和 Ba(56)，其余元素暗化（致敬《绝命毒师》）
+3. 结构要点
+   - <ol> 包含 118 个 <li>，每个含 data-mass 属性和类别 class
+   - <abbr> 显示元素符号，::after 显示完整名称
+   - <fieldset> 提供 radio 筛选按钮，grid 布局排列
+4. 其他要点
+   - container-type: inline-size + font-size: 2cqi 实现容器查询响应式
+   - 全部使用纯 CSS 实现，零 JS 交互逻辑
+-->
 <template>
     <div class="page-cell ">
         <ol>

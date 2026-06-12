@@ -1,3 +1,20 @@
+<!--
+核心逻辑：
+
+1. 多级表头
+   - 通过 el-table-column 嵌套实现三级表头结构：Date → Delivery Info → Address Info
+   - 表头自动合并列，展示层级关系
+2. 树形懒加载
+   - 配置 row-key="id" 和 lazy 属性启用懒加载
+   - tree-props 设置 children（子数据字段）和 hasChildren（是否有子节点标识）
+   - :load 回调在有子节点（hasChildren: true）的行展开时异步加载子数据
+3. 异步加载
+   - load(row, treeNode, resolve) 接收行数据与 resolve 回调
+   - 使用 generateRandomId() 生成子行 ID，模拟 1 秒延迟后 resolve 子数据
+4. 其他要点
+   - 根节点只有第一行设置了 hasChildren: true，其余为叶子行
+   - show-overflow-tooltip 处理 ID 列文字溢出
+-->
 <template>
   <el-table 
     :data="tableData"

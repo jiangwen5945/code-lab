@@ -1,7 +1,12 @@
-<!-- 
- 小结：
- 1. defineAsyncComponent
- 2. IntersectionObserver
+<!--
+核心逻辑：
+
+1. 组件级懒加载
+   - IntersectionObserver 监听非首屏容器进入视口
+   - defineAsyncComponent 动态导入子组件
+2. 延时渲染策略
+   - 进入视口后延迟 3 秒再渲染组件
+   - 两个非首屏区域独立观察和渲染
 -->
 <template>
     <div class="page-cell">

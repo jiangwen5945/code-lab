@@ -1,3 +1,17 @@
+<!--
+核心逻辑：
+
+1. LRC 歌词解析
+   - 解析 [mm:ss] 格式时间戳与对应文本
+   - 转换为 { times, words } 对象数组
+2. 实时歌词同步
+   - audio timeupdate 事件获取当前播放时间
+   - 遍历查找匹配的歌词索引 (findIndex)
+3. 滚动高亮效果
+   - 计算 translateY 偏移量实现歌词自动滚动
+   - 边界限制防止越界 (minOffset/maxOffset)
+   - 当前行 scale(1.5) 放大 + 白色高亮
+-->
 <template>
     <div class="page-cell2">
         <h2 class="title">{{ music['title'] }}</h2>

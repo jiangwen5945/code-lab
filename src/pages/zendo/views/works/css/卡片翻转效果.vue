@@ -1,3 +1,19 @@
+<!--
+核心逻辑：
+
+1. 主要 CSS 技术/视觉机制
+   - perspective 建立 3D 视场，backface-visibility: hidden 确保旋转后背面不可见
+   - .front 面 hover 时 rotateY(-180deg) 翻转到背面
+   - .back 面初始 rotateY(-180deg) 隐藏，hover 时 rotateY(0deg) 翻转为正面
+2. 交互方式
+   - hover 触发翻转动画，transition: all 1s 平滑过渡
+3. 结构要点
+   - .card 为相对定位容器，.front 和 .back 绝对定位重叠
+   - .back 包含图片和文字说明
+4. 其他要点
+   - 翻转使用 Y 轴旋转，也可改为 X 轴实现上下翻转
+   - object-fit: cover 确保图片覆盖容器
+-->
 <template>
     <div class="page-cell flex-cc">
         <div class="card">

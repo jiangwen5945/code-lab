@@ -1,7 +1,13 @@
-<!-- 
- 小结：
- 1. defineAsyncComponent
- 2. IntersectionObserver
+<!--
+核心逻辑：
+
+1. 异步逐字输出
+   - async/await + setTimeout 构造延迟循环
+   - 每次迭代截取文本 substring(0, t) 追加到面板
+   - 配合 `|` 字符模拟光标闪烁效果
+2. 古诗词展示
+   - 使用 Ma Shan Zheng 行书字体展示《春江花月夜》
+   - 文本预设完整诗句，逐字打印呈现
 -->
 <template>
     <div class="page-cell">
@@ -64,7 +70,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-@import url('../../../assets/fonts/googleapis.css');
+// @import url('../../../assets/fonts/googleapis.css');
 
 .pannel {
     font-family: "Ma Shan Zheng", cursive;

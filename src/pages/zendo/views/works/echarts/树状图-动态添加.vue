@@ -1,3 +1,19 @@
+<!--
+核心逻辑：
+
+1. 树图展示层级数据
+   - 使用 tree 系列展示树形结构，支持 expandAndCollapse 折叠展开
+   - roam: true 支持缩放漫游，edgeShape: 'polyline' 折线连接
+2. 动态添加节点
+   - 点击末级叶子节点触发 addChildNode，显示"+添加"按钮
+   - 点击添加按钮弹出 Element Plus el-dialog 对话框，输入节点名称
+   - 通过 getOption/setOption + 递归 findNodeById 查找父节点并追加子节点
+3. 数据流
+   - 初始数据为 treeData 响应式数组，新节点通过 mock 异步生成
+4. 其他要点
+   - 支持键盘 Enter 快捷键提交添加
+   - 监听 window.resize 自适应
+-->
 <template>
     <div class="page">
         <div class="echarts-container" ref="chartRef"></div>

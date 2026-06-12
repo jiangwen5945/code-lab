@@ -1,3 +1,18 @@
+<!--
+核心逻辑：
+
+1. 主要 CSS 技术/视觉机制
+   - 文字扫光：background-clip: text + 渐变背景，通过 @keyframes 改变 background-position 从 -100% 到 200% 实现扫光
+   - 容器扫光：::after 伪元素 linear-gradient 渐变条，通过 translateX 从 -100% 到 100% 扫过
+   - 不规则遮罩扫光：mask 属性引用 PNG 图片作为遮罩，实现不规则形状扫光
+2. 交互方式
+   - 纯 CSS 自动播放，无限循环
+3. 结构要点
+   - 三种扫光分别对应 h1（文字）、.shark-wrap（容器）、.shark-wrap__mask（不规则遮罩）
+4. 其他要点
+   - 扫光渐变条使用 transparent 40% → rgba(white, 0.7) → transparent 60% 形成亮条
+   - background-size: 50% 控制扫光条宽度，inset: -20% 扩大伪元素区域避免扫光裁切
+-->
 <template>
     <div class="page-cell flex-vcc">
         <!-- 类型1 -->

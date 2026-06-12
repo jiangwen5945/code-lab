@@ -1,3 +1,19 @@
+<!--
+核心逻辑：
+
+1. 主要 CSS 技术/视觉机制
+   - @property --rotate 注册 CSS 角度变量，使渐变角度可被 @keyframes 驱动
+   - ::before 使用 linear-gradient(var(--rotate)) 作旋转彩色渐变边框
+   - ::after 添加 blur 模糊效果增强发光感
+   - @keyframes spin 驱动 --rotate 从 0deg 到 360deg 无限旋转
+2. 交互方式
+   - hover 时停止动画（animation: none）、隐藏边框（opacity: 0）、显示文字颜色
+3. 结构要点
+   - .card 为卡片主体，::before 为彩色边框层，::after 为发光光晕层
+4. 其他要点
+   - @property 是 CSS Houdini 特性，需浏览器支持
+   - 卡片尺寸使用 CSS 自定义属性 --card-height/--card-width 控制
+-->
 <script>
 export default {
     cover: 'https://iili.io/Jq9GrUg.gif',
@@ -12,7 +28,6 @@ export default {
 `
 }
 </script>
-
 <template>
     <div class="page-cell  flex-cc">
         <div class="card">Magic Card</div>

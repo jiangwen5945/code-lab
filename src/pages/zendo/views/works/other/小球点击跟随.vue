@@ -1,3 +1,16 @@
+<!--
+核心逻辑：
+
+1. Web Animation API 驱动动画
+   - element.animate() 从当前位置平滑移动到点击位置
+   - 多关键帧定义挤压变形 (scaleX) 的弹性效果
+2. 运动方向计算
+   - Math.atan2 计算点击位置相对小球的旋转角度
+   - 动画过程中始终朝向运动方向
+3. 动画管理
+   - 新动画开始前取消之前所有动画 (getAnimations)
+   - onMounted 初始化小球起始位置
+-->
 <template>
     <div class="page-cell" @click="handleClick">
         <h2 class="slide-down">wed animation api</h2>

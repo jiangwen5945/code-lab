@@ -1,4 +1,13 @@
+<!--
+核心逻辑：
 
+1. BroadcastChannel 跨页签通信
+   - 创建命名通道 "myChannel" 实现多标签页实时通信
+   - onmessage 监听接收消息，postMessage 发送消息
+2. 双向数据同步
+   - 输入框内容变更时自动广播到所有同源页签
+   - 组件卸载时调用 channel.close() 清理通道
+-->
 <script>
 export default {
   info: `BroadcastChannel`,
@@ -28,6 +37,7 @@ const changeInput = (e) => {
   channel.postMessage(e.target.value)
 }
 </script>
+
 <template>
   <input type="text" v-model="msg" @input="changeInput" />
 </template>

@@ -1,3 +1,18 @@
+<!--
+核心逻辑：
+
+1. TablePlus 表格组件
+   - 接收 tableData（数据源）和 tableColumns（列配置）props
+   - 通过作用域插槽 #operation="scoped" 暴露行数据，支持自定义操作列
+   - 使用 el-button 在插槽内触发编辑回调
+2. msg 消息提示工具
+   - 基于 JSX 封装的弹窗函数，位于 utils/message
+   - 支持三种调用方式：msg(text)、msg(text, title)、msg(text, title, callback)
+   - callback 接收关闭函数 (fn) => { /* 回调 */ fn() }
+3. [使用方式]
+   - 表格：引入 TablePlus，传入数据与列配置，通过插槽自定义操作列按钮
+   - 消息：import { msg } from '@/utils/message' 后直接调用
+-->
 <script setup>
 import TablePlus from '../../../components/TablePlus.vue'
 import { msg } from '@/utils/message'
