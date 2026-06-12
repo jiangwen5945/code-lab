@@ -16,142 +16,137 @@
    - will-change 优化动画渲染性能，默认 filter: grayscale(1) brightness(.5)
 -->
 <template>
-    <div class="page-cell  flex-cc">
-        <div class="wrapper">
-            <div class="items">
-                <div class="item" tabindex="0"
-                    style="background-image: url(https://highflyer.sirv.com/cloud/15_voqq0c.png)"></div>
-                <div class="item" tabindex="0"
-                    style="background-image: url(https://highflyer.sirv.com/cloud/21_wbsty7.png)"></div>
-                <div class="item" tabindex="0"
-                    style="background-image: url(https://highflyer.sirv.com/cloud/1_zlqnwl.jpg)"></div>
-                <div class="item" tabindex="0"
-                    style="background-image: url(https://highflyer.sirv.com/cloud/16_epnmqm.png)"></div>
-                <div class="item" tabindex="0"
-                    style="background-image: url(https://highflyer.sirv.com/cloud/Screenshot_23_8_nbzwdm.png)"></div>
-                <div class="item" tabindex="0"
-                    style="background-image: url(https://highflyer.sirv.com/cloud/29_jbd4di.jpg)"></div>
-                <div class="item" tabindex="0"
-                    style="background-image: url(https://highflyer.sirv.com/cloud/14_zkwtff.png)"></div>
-                <div class="item" tabindex="0"
-                    style="background-image: url(https://highflyer.sirv.com/cloud/8_ucihr5.png)"></div>
-                <div class="item" tabindex="0"
-                    style="background-image: url(https://highflyer.sirv.com/cloud/18_bguamv.png)"></div>
-                <div class="item" tabindex="0"
-                    style="background-image: url(https://highflyer.sirv.com/cloud/Screenshot_18_4_mscxmr.jpg)"></div>
-                <div class="item" tabindex="0"
-                    style="background-image: url(https://highflyer.sirv.com/cloud/2_zja2bq.png)"></div>
-                <div class="item" tabindex="0"
-                    style="background-image: url(https://highflyer.sirv.com/cloud/11_p1oi8m.png)"></div>
-
-            </div>
-
-        </div>
+  <div class="page-cell flex-cc">
+    <div class="wrapper">
+      <div class="items">
+        <div
+          v-for="(img, index) in images"
+          :key="index"
+          class="item"
+          tabindex="0"
+          :style="{ backgroundImage: `url(${img})` }"
+        ></div>
+      </div>
     </div>
+  </div>
 </template>
+
+<script setup>
+import img1 from '@/pages/zendo/assets/imgs/w_01.webp'
+import img2 from '@/pages/zendo/assets/imgs/w_02.webp'
+import img3 from '@/pages/zendo/assets/imgs/w_03.webp'
+import img4 from '@/pages/zendo/assets/imgs/w_04.webp'
+import img5 from '@/pages/zendo/assets/imgs/w_05.webp'
+import img6 from '@/pages/zendo/assets/imgs/w_06.webp'
+
+const images = [img1, img2, img3, img4, img5, img6, img1, img2, img3, img4, img5]
+</script>
+
 <style scoped lang="scss">
 .page-cell {
-    --index: calc(1vw + 1vh);
-    --transition: cubic-bezier(.1, .7, 0, 1);
+  --index: calc(1vw + 1vh);
+  --transition: cubic-bezier(0.1, 0.7, 0, 1);
 }
 
 .wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .items {
-    display: flex;
-    gap: 6.4px;
-    perspective: calc(var(--index) * 35);
+  display: flex;
+  gap: 6.4px;
+  perspective: calc(var(--index) * 35);
 }
 
 .item {
-    width: calc(var(--index) * 3);
-    height: calc(var(--index) * 12);
-    background-color: #222;
-    background-size: cover;
-    background-position: center;
-    cursor: pointer;
-    filter: grayscale(1) brightness(.5);
-    transition: transform 1.25s var(--transition), filter 3s var(--transition), width 1.25s var(--transition);
-    will-change: transform, filter, rotateY, width;
+  width: calc(var(--index) * 3);
+  height: calc(var(--index) * 12);
+  background-color: #222;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  filter: grayscale(1) brightness(0.5);
+  transition:
+    transform 1.25s var(--transition),
+    filter 3s var(--transition),
+    width 1.25s var(--transition);
+  will-change: transform, filter, rotateY, width;
 }
 
 .item::before,
 .item::after {
-    content: '';
-    position: absolute;
-    height: 100%;
-    width: 20px;
-    right: calc(var(--index) * -1);
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 20px;
+  right: calc(var(--index) * -1);
 }
 
 .item::after {
-    left: calc(var(--index) * -1);
+  left: calc(var(--index) * -1);
 }
 
 .items .item:hover {
-    filter: inherit;
-    transform: translateZ(calc(var(--index) * 10));
+  filter: inherit;
+  transform: translateZ(calc(var(--index) * 10));
 }
 
 /*Right*/
 
-.items .item:hover+* {
-    filter: inherit;
-    transform: translateZ(calc(var(--index) * 8.5)) rotateY(35deg);
-    z-index: -1;
+.items .item:hover + * {
+  filter: inherit;
+  transform: translateZ(calc(var(--index) * 8.5)) rotateY(35deg);
+  z-index: -1;
 }
 
-.items .item:hover+*+* {
-    filter: inherit;
-    transform: translateZ(calc(var(--index) * 5.6)) rotateY(40deg);
-    z-index: -2;
+.items .item:hover + * + * {
+  filter: inherit;
+  transform: translateZ(calc(var(--index) * 5.6)) rotateY(40deg);
+  z-index: -2;
 }
 
-.items .item:hover+*+*+* {
-    filter: inherit;
-    transform: translateZ(calc(var(--index) * 2.5)) rotateY(30deg);
-    z-index: -3;
+.items .item:hover + * + * + * {
+  filter: inherit;
+  transform: translateZ(calc(var(--index) * 2.5)) rotateY(30deg);
+  z-index: -3;
 }
 
-.items .item:hover+*+*+*+* {
-    filter: inherit;
-    transform: translateZ(calc(var(--index) * .6)) rotateY(15deg);
-    z-index: -4;
+.items .item:hover + * + * + * + * {
+  filter: inherit;
+  transform: translateZ(calc(var(--index) * 0.6)) rotateY(15deg);
+  z-index: -4;
 }
-
 
 /*Left*/
 
 .items .item:has(+ :hover) {
-    filter: inherit;
-    transform: translateZ(calc(var(--index) * 8.5)) rotateY(-35deg);
+  filter: inherit;
+  transform: translateZ(calc(var(--index) * 8.5)) rotateY(-35deg);
 }
 
 .items .item:has(+ * + :hover) {
-    filter: inherit;
-    transform: translateZ(calc(var(--index) * 5.6)) rotateY(-40deg);
+  filter: inherit;
+  transform: translateZ(calc(var(--index) * 5.6)) rotateY(-40deg);
 }
 
 .items .item:has(+ * + * + :hover) {
-    filter: inherit;
-    transform: translateZ(calc(var(--index) * 2.5)) rotateY(-30deg);
+  filter: inherit;
+  transform: translateZ(calc(var(--index) * 2.5)) rotateY(-30deg);
 }
 
 .items .item:has(+ * + * + * + :hover) {
-    filter: inherit;
-    transform: translateZ(calc(var(--index) * .6)) rotateY(-15deg);
+  filter: inherit;
+  transform: translateZ(calc(var(--index) * 0.6)) rotateY(-15deg);
 }
 
 .items .item:active,
 .items .item:focus {
-    width: 28vw;
-    filter: inherit;
-    z-index: 100;
-    transform: translateZ(calc(var(--index) * 10));
-    margin: 0 .45vw;
+  width: 28vw;
+  filter: inherit;
+  z-index: 100;
+  transform: translateZ(calc(var(--index) * 10));
+  margin: 0 0.45vw;
 }
 </style>
