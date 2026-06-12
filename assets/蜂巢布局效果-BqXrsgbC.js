@@ -1,0 +1,1 @@
+import{_ as c,e as s,f as _,u as o,o as a}from"./index-BrMQvGUu.js";const t={class:"page-cell"},r=["src"],n={__name:"蜂巢布局效果",setup(l){const e="/code-lab/";return(d,f)=>(a(),s("div",t,[_("iframe",{src:`${o(e)}honeycomb.html`,frameborder:"0"},null,8,r)]))}},p=c(n,[["__scopeId","data-v-cc3f002c"]]);export{p as default};
