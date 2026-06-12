@@ -49,7 +49,9 @@ export const useZendoStore = defineStore('zendo', {
           name: '首页',
           path: '/home'
         }
-      ]
+      ],
+      hasSeenWelcome: localStorage.getItem('zendo_hasSeenWelcome') === 'true',
+      hasSeenTour: localStorage.getItem('zendo_hasSeenTour') === 'true',
     }
   },
   actions: {
@@ -88,6 +90,18 @@ export const useZendoStore = defineStore('zendo', {
     // 更新当前显示笔记
     updateNotes(text){
       this.notes = text
+    },
+
+    // 标记欢迎页已看
+    setWelcomeSeen() {
+      this.hasSeenWelcome = true
+      localStorage.setItem('zendo_hasSeenWelcome', 'true')
+    },
+
+    // 标记引导已看
+    setTourSeen() {
+      this.hasSeenTour = true
+      localStorage.setItem('zendo_hasSeenTour', 'true')
     }
   }
 })

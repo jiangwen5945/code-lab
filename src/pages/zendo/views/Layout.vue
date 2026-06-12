@@ -3,7 +3,7 @@ import Sidebar from '../components/Sidebar.vue';
 import TheHeader from '../components/TheHeader.vue';
 import CommonTag from '../components/CommonTag.vue'
 import { onBeforeRouteUpdate, onBeforeRouteLeave, useRoute, RouterView } from 'vue-router';
-import { computed, watch } from 'vue';
+import { computed, ref, watch, onMounted, nextTick } from 'vue';
 import { useZendoStore } from '../stores/zendo.js'
 import { KeepAlive } from 'vue';
 
@@ -16,7 +16,37 @@ watch(() => route.name, (name) => {
   }
 }, { immediate: true })
 
+const features = [
+  { icon: 'MagicStick', desc: '30+ 前端特效 — CSS 动画、ECharts 图表等' },
+  { icon: 'Monitor', desc: '在线预览 — 查看源码，一键打开演示' },
+  { icon: 'Switch', desc: '暗黑模式 — 暗黑与明亮主题自由切换' },
+  { icon: 'FolderOpened', desc: '分类浏览 — 按分类快速定位感兴趣的内容' },
+]
+
 const zendoStore = useZendoStore()
+const showWelcome = ref(false)
+const showTour = ref(false)
+
+onMounted(() => {
+  if (!zendoStore.hasSeenWelcome) {
+    showWelcome.value = true
+  } else if (!zendoStore.hasSeenTour) {
+    showTour.value = true
+  }
+})
+
+function onWelcomeClose() {
+  zendoStore.setWelcomeSeen()
+  nextTick(() => {
+    if (!zendoStore.hasSeenTour) {
+      showTour.value = true
+    }
+  })
+}
+
+function onTourClose() {
+  zendoStore.setTourSeen()
+}
 
 // 在当前路由改变，但是该组件被复用时调用
 onBeforeRouteUpdate((to, from) => {
@@ -72,6 +102,51 @@ export default {
       </el-main>
     </el-container>
   </el-container>
+
+  <!-- 首次登录欢迎弹窗 -->
+  <el-dialog v-model="showWelcome" title="欢迎来到代码实验室" width="500px" :close-on-click-modal="false" @closed="onWelcomeClose">
+    <div class="welcome-body">
+      <div class="welcome-logo">
+        <img src="../assets/imgs/logo.png" alt="logo">
+      </div>
+      <p class="welcome-desc">你的前端探索空间，汇集 30+ 特效示例</p>
+      <div class="features">
+        <div class="feature" v-for="f in features" :key="f.title">
+          <el-icon :size="18"><component :is="f.icon" /></el-icon>
+          <span>{{ f.desc }}</span>
+        </div>
+      </div>
+    </div>
+    <template #footer>
+      <div class="welcome-footer">
+        <el-button type="warning" @click="showWelcome = false" size="large">开始探索</el-button>
+      </div>
+    </template>
+  </el-dialog>
+
+   <!-- 首次登录使用引导 --> 
+  <el-tour v-model="showTour" :contentStyle="{ maxWidth: '320px' }" @close="onTourClose">
+    <el-tour-step
+      target="#tour-link"
+      title="独立窗口打开"
+      description="点击此图标可在新窗口中独立打开当前示例页面"
+      :nextButtonProps="{ children: '下一步' }"
+    />
+    <el-tour-step
+      target="#tour-edit"
+      title="编辑笔记"
+      description="在这里可以查看当前示例的源码实现和核心逻辑总结"
+      :prevButtonProps="{ children: '上一步' }"
+      :nextButtonProps="{ children: '下一步' }"
+    />
+    <el-tour-step
+      target="#tour-theme"
+      title="主题切换"
+      description="切换暗黑模式和明亮模式"
+      :prevButtonProps="{ children: '上一步' }"
+      :nextButtonProps="{ children: '完成' }"
+    />
+  </el-tour>
 </template>
 
 
@@ -103,6 +178,50 @@ export default {
   .v-enter-from,
   .v-leave-to {
     opacity: 0;
+  }
+}
+
+.welcome-body {
+  text-align: center;
+  padding: 16px 32px 8px;
+
+  .welcome-logo {
+    img {
+      width: 72px;
+      margin-bottom: 16px;
+    }
+  }
+
+  .welcome-desc {
+    font-size: 15px;
+    color: var(--el-text-color-secondary);
+    margin: 0 0 28px;
+  }
+}
+
+.welcome-footer {
+  display: flex;
+  justify-content: center;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+
+  .feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: var(--el-text-color-primary);
+    border-radius: 8px;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: var(--el-fill-color-light);
+    }
   }
 }
 </style>

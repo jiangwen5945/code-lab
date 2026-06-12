@@ -50,19 +50,19 @@ const baseUrl = import.meta.env.BASE_URL
         </div>
 
         <div class="rbox">
-            <div class="icon-box" @click="handleLink">
+            <div id="tour-link" class="icon-box" @click="handleLink">
                 <el-icon>
                     <Link />
                 </el-icon>
             </div>
 
-            <div class="bell-box icon-box" @click="handleMsg">
+            <div id="tour-edit" class="bell-box icon-box" @click="handleMsg">
                 <el-icon>
                     <Edit />
                 </el-icon>
             </div>
 
-            <div class="theme-box">
+            <div id="tour-theme" class="theme-box">
                 <ToggleTheme />
             </div>
 

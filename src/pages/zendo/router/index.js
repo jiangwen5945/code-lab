@@ -26,30 +26,15 @@ const routes = [
   }
 ]
 
-// let mockRoutes = handleMenulist(mockMenuList)
 const router = createRouter({
-  // history: createWebHistory(import.meta.env.BASE_path),
   history: createWebHashHistory(),
   routes
-})
-
-router.beforeEach((to, from) => {
-  console.log('全局前置守卫 - beforeEach')
-  // if (to.meta.permission) {
-  // } else {
-  // return {
-  //   path: '/login',
-  //   // 保存我们所在的位置，以便以后再来
-  //   query: { redirect: to.fullPath }
-  // }
-  // }
 })
 
 router.beforeResolve((to, from) => {
   console.log('全局解析守卫 - beforeResolve')
 })
 
-// 你也可以注册全局后置钩子，然而和守卫不同的是，这些钩子不会接受 next 函数也不会改变导航本身：
 router.afterEach((to, from) => {
   console.log('全局后置钩子 - afterEach')
 })
