@@ -17,7 +17,6 @@
 -->
 <template>
   <div class="page-cell flex-cc">
-    <input type="text">
     <div class="wrapper">
       <div class="items">
         <div
