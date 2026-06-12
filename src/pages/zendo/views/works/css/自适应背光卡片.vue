@@ -25,37 +25,31 @@
     [background-clip]            | 背景的绘制区域  CSS3 
 -->
 
-<script setup>
-import { useZendoStore } from '@/pages/zendo/stores/zendo'
-const zendoStore = useZendoStore()
-</script>
-
 <template>
     <div class="page-cell  flex-cc">
-        <div class="box1 backlight"></div>
-        <div class="box2 backlight"></div>
-        <div class="box3 backlight"></div>
+        <div class="backlight" :style="{ backgroundImage: `url(${images[0]})` }"></div>
+        <div class="backlight" :style="{ backgroundImage: `url(${images[1]})` }"></div>
     </div>
 </template>
+
+<script setup>
+const base = import.meta.env.BASE_URL
+const images = [
+  `${base}img/work/item-1.webp`,
+  `${base}img/work/item-5.webp`
+]
+</script>
+
+
+
 <style scoped lang="scss">
-.box1 {
-    background: #fff url('../../../assets/imgs/w_01.webp') no-repeat center / cover;
-}
-
-.box2 {
-    background: #fff url('../../../assets/imgs/w_02.webp') no-repeat center / cover;
-}
-
-.box3 {
-    background: #fff url('../../../assets/imgs/w_03.webp') no-repeat center / cover;
-}
-
 .backlight {
     position: relative;
-    width: 500px;
+    width: 400px;
     height: 500px;
     border-radius: 10px;
     margin: 20px;
+     background: #fff no-repeat center / cover;
     
 
     &:after {

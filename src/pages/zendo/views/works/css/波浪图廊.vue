@@ -32,14 +32,19 @@
 </template>
 
 <script setup>
-import img1 from '@/pages/zendo/assets/imgs/w_01.webp'
-import img2 from '@/pages/zendo/assets/imgs/w_02.webp'
-import img3 from '@/pages/zendo/assets/imgs/w_03.webp'
-import img4 from '@/pages/zendo/assets/imgs/w_04.webp'
-import img5 from '@/pages/zendo/assets/imgs/w_05.webp'
-import img6 from '@/pages/zendo/assets/imgs/w_06.webp'
-
-const images = [img1, img2, img3, img4, img5, img6, img1, img2, img3, img4, img5]
+const base = import.meta.env.BASE_URL
+const images = [
+  `${base}img/work/item-1.webp`,
+  `${base}img/work/item-2.webp`,
+  `${base}img/work/item-3.webp`,
+  `${base}img/work/item-4.webp`,
+  `${base}img/work/item-5.webp`,
+  `${base}img/work/item-1.webp`,
+  `${base}img/work/item-2.webp`,
+  `${base}img/work/item-3.webp`,
+  `${base}img/work/item-4.webp`,
+  `${base}img/work/item-5.webp`,
+]
 </script>
 
 <style scoped lang="scss">

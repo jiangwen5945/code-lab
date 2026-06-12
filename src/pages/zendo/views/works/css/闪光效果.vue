@@ -16,26 +16,25 @@
 <template>
     <div class="page-cell flex-vcc">
         <!-- 类型1 -->
-        <h1 class="shark-txt">文以载道</h1>
+        <h1 class="shark-txt">Hello World</h1>
         <!-- 类型2 -->
         <div class="shark-wrap">
-            <img src="/src/pages/zendo/assets/imgs/w_03.webp" alt="">
-        </div>
-        <!-- 类型3 -->
-        <div class="shark-wrap shark-wrap__mask">
-            <img src="../../../assets//imgs/mask_demo.png" alt="">
+            <img :src="`${base}img/work/item-2.webp`">
         </div>
     </div>
 </template>
 
+<script setup>
+const base = import.meta.env.BASE_URL
+</script>
+
+
 <style lang="scss" scoped>
-
-
 /* 扫光文字 */
 h1 {
     font-size: 120px;
     font-weight: bold;
-    color: #9747FF;
+    color: #323232;
     text-align: center;
     margin: 0;
 }
@@ -86,11 +85,5 @@ h1 {
     to {
         transform: translateX(100%);
     }
-}
-
-
-/* 扫光容器（不规则图片扫光） */
-.shark-wrap__mask {
-    mask: url('../../../assets/imgs/mask_demo.png') 0 0/100%;
 }
 </style>

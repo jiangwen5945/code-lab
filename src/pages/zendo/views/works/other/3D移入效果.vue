@@ -45,9 +45,7 @@ onUnmounted(() => {
 })
 
 // 引入图片方法
-const requireImg = (path) => {
-    return new URL(`${path}`, import.meta.url).href
-}
+const base = import.meta.env.BASE_URL
 
 </script>
 
@@ -55,17 +53,14 @@ const requireImg = (path) => {
 <template>
     <div class="page-cell  flex-cc">
         <div class="card" ref="card">
-            <img src="/src/pages/zendo/assets/imgs/w_13.webp" alt="">
+            <img :src="`${base}img/work/item-1.webp`">
         </div>
         <div class="card1" v-hover3d>
-            <img src="../../../assets/imgs/w_13.webp" alt="">
-        </div>
-
-        <div class="card2" v-hover3d>
-            <img src="../../../assets/imgs/w_13.webp" alt="">
+            <img :src="`${base}img/work/item-1.webp`">
         </div>
     </div>
 </template>
+
 <style scoped lang="scss">
 .card {
     width: 400px;
@@ -87,30 +82,13 @@ const requireImg = (path) => {
 }
 
 .card1 {
-    width: 200px;
+    width: 300px;
     margin-left: 50px;
     border-radius: 10px;
-    box-shadow: rgb(38, 57, 77) 0px 10px 15px -5px;
+    box-shadow: rgb(55, 140, 231) 0px 10px 15px -5px;
 
     &:hover {
-        box-shadow: rgb(208, 249, 0) 0px 10px 15px -5px;
-    }
-
-    img {
-        border-radius: inherit;
-        width: 100%;
-        vertical-align: top;
-    }
-}
-
-.card2 {
-    width: 100px;
-    margin-left: 50px;
-    border-radius: 10px;
-    box-shadow: rgb(38, 57, 77) 0px 5px 8px -3px;
-
-    &:hover {
-        box-shadow: rgb(98, 1, 255) 0px 5px 8px -3px;
+        box-shadow: rgb(0, 145, 249) 0px 10px 15px -5px;
     }
 
     img {
