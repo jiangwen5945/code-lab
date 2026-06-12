@@ -1,1 +1,0 @@
-import{_ as e,e as o,f as t,o as c}from"./index-B5A7OHNV.js";const a={link:"https://github.com/chokcoco/iCSS/issues/80",cover:"https://iili.io/JqJOTfj.png"},i={class:"page-cell flex-cc"};function n(_,s,r,l,p,d){return c(),o("div",i,s[0]||(s[0]=[t("div",{class:"mask"},null,-1)]))}const u=e(a,[["render",n],["__scopeId","data-v-cdb3e370"]]);export{u as default};

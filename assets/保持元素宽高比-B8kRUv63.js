@@ -1,0 +1,1 @@
+import{_ as s,e as _,f as e,o as a}from"./index-CYRnQMR9.js";const o={},t={class:"page-cell flex-cc"};function n(r,c){return a(),_("div",t,c[0]||(c[0]=[e("div",{class:"box"},[e("div",{class:"inner"},[e("div",{class:"container flex-cc"},"保持宽高比")])],-1)]))}const d=s(o,[["render",n],["__scopeId","data-v-2682cebc"]]);export{d as default};
