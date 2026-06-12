@@ -38,8 +38,6 @@ export const useZendoStore = defineStore('zendo', {
   state: () => {
     return {
       isCollapse: false,
-      isDark: false,
-
       menuList,
       notes: '123',
       navList: [
@@ -63,14 +61,6 @@ export const useZendoStore = defineStore('zendo', {
         this.isCollapse = !this.isCollapse
       }
     },
-
-    // 切换主题
-    toggleTheme() {
-      this.isDark = !this.isDark
-      document.documentElement.classList.toggle('dark')
-      console.log('toggleTheme')
-    },
-
 
     // 更新导航栏数组数据
     updateNavList(item) {
