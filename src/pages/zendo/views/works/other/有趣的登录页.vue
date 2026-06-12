@@ -627,9 +627,11 @@ onUnmounted(() => {
 
 .grid-overlay {
   position: absolute; inset: 0;
-  background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(0, 0, 0, .05) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0, 0, 0, .05) 1px, transparent 1px);
   background-size: 20px 20px;
+  background-color: ;
+
 }
 .glow-1 {
   position: absolute; top: 25%; right: 25%;
