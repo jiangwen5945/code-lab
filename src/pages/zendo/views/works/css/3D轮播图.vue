@@ -20,22 +20,22 @@
         <div class="container">
             <div class="card-box">
                 <div class="card">
-                    <img src="../../../assets//imgs/j1.jpg" alt="">
+                    <img src="../../../assets//imgs/w_01.webp" alt="">
                 </div>
                 <div class="card">
-                    <img src="../../../assets//imgs/j2.jpg" alt="">
+                    <img src="../../../assets//imgs/w_02.webp" alt="">
                 </div>
                 <div class="card">
-                    <img src="../../../assets//imgs/j3.jpg" alt="">
+                    <img src="../../../assets//imgs/w_03.webp" alt="">
                 </div>
                 <div class="card">
-                    <img src="../../../assets//imgs/j4.jpg" alt="">
+                    <img src="../../../assets//imgs/w_04.webp" alt="">
                 </div>
                 <div class="card">
-                    <img src="../../../assets//imgs/j5.jpg" alt="">
+                    <img src="../../../assets//imgs/w_05.webp" alt="">
                 </div>
                 <div class="card">
-                    <img src="../../../assets//imgs/j6.jpg" alt="">
+                    <img src="../../../assets//imgs/w_06.webp" alt="">
                 </div>
             </div>
         </div>

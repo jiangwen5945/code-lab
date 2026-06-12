@@ -19,7 +19,7 @@
         <h1 class="shark-txt">文以载道</h1>
         <!-- 类型2 -->
         <div class="shark-wrap">
-            <img src="/src/pages/zendo/assets/imgs/j3.jpg" alt="">
+            <img src="/src/pages/zendo/assets/imgs/w_03.webp" alt="">
         </div>
         <!-- 类型3 -->
         <div class="shark-wrap shark-wrap__mask">

@@ -13,15 +13,7 @@
 4. 其他要点
    - background 简写形式包含 color/image/repeat/position/size
    - 背光颜色随图片主色调自动适配，无需 JS 计算
--->
-<script>
-export default {
-  cover: 'https://iili.io/Jq9GrUg.gif',
-  link: 'https://juejin.cn/post/7262007830721413180',
-  date:'2023-09-09',
-  info: `根据图片本身颜色进行自适应背光效果。
-  知识点：
-  1. background的简写形式：在CSS2.1里，background属性的简写方式包含五种属性值，从CSS3开始，又增加了3个新的属性值，加起来一共8个。
+5. background的简写形式：在CSS2.1里，background属性的简写方式包含五种属性值，从CSS3开始，又增加了3个新的属性值，加起来一共8个。
     background: 
     [background-color]           | 使用的背景颜色  CSS2.1
     [background-image]           | 使用的背景图像  CSS2.1
@@ -31,9 +23,7 @@ export default {
     [background-size]            | 背景图片的尺寸  CSS3
     [background-origin]          | 背景图片的定位区域  CSS3
     [background-clip]            | 背景的绘制区域  CSS3 
-`
-}
-</script>
+-->
 
 <script setup>
 import { useZendoStore } from '@/pages/zendo/stores/zendo'
@@ -49,15 +39,15 @@ const zendoStore = useZendoStore()
 </template>
 <style scoped lang="scss">
 .box1 {
-    background: #fff url('../../../assets/imgs/j1.jpg') no-repeat center / cover;
+    background: #fff url('../../../assets/imgs/w_01.webp') no-repeat center / cover;
 }
 
 .box2 {
-    background: #fff url('../../../assets/imgs/j2.jpg') no-repeat center / cover;
+    background: #fff url('../../../assets/imgs/w_02.webp') no-repeat center / cover;
 }
 
 .box3 {
-    background: #fff url('../../../assets/imgs/j3.jpg') no-repeat center / cover;
+    background: #fff url('../../../assets/imgs/w_03.webp') no-repeat center / cover;
 }
 
 .backlight {

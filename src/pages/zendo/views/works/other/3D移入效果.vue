@@ -55,14 +55,14 @@ const requireImg = (path) => {
 <template>
     <div class="page-cell  flex-cc">
         <div class="card" ref="card">
-            <img src="/src/pages/zendo/assets/imgs/p6.png" alt="">
+            <img src="/src/pages/zendo/assets/imgs/w_13.webp" alt="">
         </div>
         <div class="card1" v-hover3d>
-            <img src="../../../assets/imgs/p6.png" alt="">
+            <img src="../../../assets/imgs/w_13.webp" alt="">
         </div>
 
         <div class="card2" v-hover3d>
-            <img src="../../../assets/imgs/p6.png" alt="">
+            <img src="../../../assets/imgs/w_13.webp" alt="">
         </div>
     </div>
 </template>

@@ -30,7 +30,7 @@ export default {
   height: 300px;
   // 背景山川图片
   background: url('https://sp-webfront.skypixel.com/skypixel/v2/public/website/assets/1535027674204-f6eca6369ec03e70262b58b0e25cda7b.jpg');
-  // background: url('../../../assets/imgs/j1.jpg');
+  // background: url('../../../assets/imgs/w_01.webp');
   background-size: cover;
   // 遮罩层svg -- dij
   mask: url('http://www2.djicdn.com/assets/images/v3/logo-black2-145dcb13c56f36a65d084180a42136fa.svg');
