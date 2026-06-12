@@ -1,3 +1,20 @@
+<!--
+核心逻辑：
+
+1. 主要 CSS 技术/视觉机制
+   - 使用 Flexbox 网格（flex-wrap + gap）展示 93 种 box-shadow 样式卡片
+   - 每种阴影通过 v-for 遍历 shadows 数组，:style 内联 boxShadow 属性动态渲染
+   - hover 时卡片 translateY(-6px) 微动效，提升交互感
+2. 交互方式
+   - 点击卡片通过 navigator.clipboard.writeText 复制 box-shadow CSS 代码到剪贴板
+   - 点击后显示绿色"已复制"徽标，2 秒后自动消失
+   - hover 时显示复制图标（CopyDocument），opacity 过渡渐显
+3. 结构要点
+   - 每个 .shadow-card 包含编号、复制徽标、复制图标三层
+   - 编号和徽标 absolute 定位在卡片的左上和右上角
+4. 其他要点
+   - 阴影数组涵盖多种经典 CSS 阴影样式（单层、多层、内阴影、彩色阴影等）
+-->
 <template>
   <div class="shadow-grid">
     <div

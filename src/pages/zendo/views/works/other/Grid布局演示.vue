@@ -1,3 +1,15 @@
+<!--
+核心逻辑：
+
+1. CSS Grid 布局切换
+   - 使用 grid-template-areas 定义 4 种预设网格区域排列
+   - 通过 grid-area 命名子元素 (a, b, c, d) 实现灵活定位
+2. 按钮交互切换
+   - 点击按钮切换 layout 响应式变量值
+   - 动态绑定 class 切换不同布局样式
+3. SCSS 主题管理
+   - 使用循环生成 4 色按钮主题，含 hover/active/disabled 状态
+-->
 <template>
     <div class="page-cell">
         <div class="btn-container">
@@ -75,24 +87,20 @@ $btnColors: #409eff, #67c23a, #e39827, #f54343;
 
 .grid-container {
     display: grid;
-    // grid-template-columns: repeat(5, 1fr);
-    // grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    // grid-template-rows: 500px 500px;
-    // grid-template-areas: ;
     column-gap: 10px;
     row-gap: 1ch;
     font-size: 24px;
-    text-align: center;
     background: #eee;
     padding: 10px;
-    // height: 100%;
     transition: .2s;
 
     .grid-box {
         background: #3cb9b4;
         min-height: 200px;
         border-radius: 10px;
-
+        color: #fff;
+        padding: 20px;
+        font-size: 14px;
 
         &:nth-child(1) {
             grid-area: a;

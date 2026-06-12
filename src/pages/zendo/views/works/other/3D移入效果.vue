@@ -1,18 +1,17 @@
-<script>
-export default {
-  cover: 'https://iili.io/Jq9GrUg.gif',
-  link: 'https://juejin.cn/post/7262007830721413180',
-  code:'http://www.baidu.com',
-  date:'2023-09-09',
-  info: `参考大佬 Chokcoco 的作品，用 Vue3.0 实现了一下，代码比较简单，就不多说了。
-  知识点：
-  1.通过伪元素制造多层表情标签，制造3D假象；
-  2.通过记录下落转向上升的那一帧开始，更换表情和背景；
-  3.学会如何通过 <code>conic-gradient</code> <code>linear-gradient</code> <code>radial-gradient </code> 实现多样化的背景效果；
-`
-}
-</script>
+<!--
+核心逻辑：
 
+1. 鼠标跟踪 3D 旋转
+   - 监听 card 的 mousemove 事件，获取 offsetX/offsetY
+   - 线性映射到 rotateX/rotateY 角度 (-10°~10°)
+   - 通过 CSS 自定义属性 --rx/--ry 动态应用变换
+2. Perspective 透视效果
+   - transform: perspective(500px) 实现 3D 景深感
+   - mouseleave 时归零角度恢复平面
+3. 自定义指令 v-hover3d
+   - 封装复用逻辑，支持多卡片同时使用
+   - 多尺寸卡片演示效果一致性
+-->
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue';
 
@@ -51,6 +50,7 @@ const requireImg = (path) => {
 }
 
 </script>
+
 
 <template>
     <div class="page-cell  flex-cc">

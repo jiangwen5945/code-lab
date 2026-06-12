@@ -1,3 +1,14 @@
+<!--
+核心逻辑：
+
+1. CSS 古典竖排排版
+   - 使用 writing-mode: vertical-rl 实现古诗词竖排从右到左显示
+   - 搭配 Ma Shan Zheng 行书字体营造传统韵味
+   - text-align: justify 实现文字分散排列
+2. 静态内容展示
+   - 直接展示《临江仙》全词，无交互逻辑
+   - 纯 CSS 样式驱动，无需 JavaScript
+-->
 <template>
     <div class="page-cell flex-cc">
         <div class="t">

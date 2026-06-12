@@ -1,3 +1,13 @@
+<!--
+核心逻辑：
+
+1. 通用 requestAnimationFrame 动画
+   - 封装 animation() 函数，基于时间差线性插值
+   - 支持自定义 from/to/duration/onUpdate 参数
+2. 应用场景
+   - 价格数字动画：从 1000 打折到 50，实时更新 DOM
+   - 元素位移动画：控制 dot 元素 left 属性移动
+-->
 <template>
     <div>
         <p >价格：¥<span ref="price">1000.00</span> </p>

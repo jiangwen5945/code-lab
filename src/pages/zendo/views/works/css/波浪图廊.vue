@@ -1,3 +1,20 @@
+<!--
+核心逻辑：
+
+1. 主要 CSS 技术/视觉机制
+   - Flexbox 横向图片列表，perspective 建立 3D 视场
+   - hover 时通过 translateZ 前推 + rotateY 旋转 + filter 去除灰度/提亮，形成波浪展开效果
+   - + 相邻兄弟选择器控制右侧卡片逐级变形，:has() 选择器控制左侧卡片对称变形
+2. 交互方式
+   - hover 触发波浪展开动画，transition 时长 1.25s，使用 cubic-bezier(.1, .7, 0, 1) 弹性曲线
+   - click/focus 时 width 展开至 28vw，z-index: 100 突出选中卡片
+3. 结构要点
+   - .items 为 flex 容器，gap: 6.4px，每个 .item 使用 background-image 展示图片
+   - ::before/::after 伪元素扩大 hover 触发区域（左右各 20px），防止快速滑动时断触
+4. 其他要点
+   - CSS 自定义属性 --index: calc(1vw + 1vh) 实现响应式尺寸
+   - will-change 优化动画渲染性能，默认 filter: grayscale(1) brightness(.5)
+-->
 <template>
     <div class="page-cell  flex-cc">
         <div class="wrapper">

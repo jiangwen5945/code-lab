@@ -1,3 +1,18 @@
+<!--
+核心逻辑：
+
+1. 中国地图下钻
+   - 从本地 API 加载中国地图 GeoJSON 并注册，支持省份→城市逐级点击钻取
+   - 使用 mapCache 缓存已加载的省级/市级地图数据，避免重复请求
+2. 交互方式
+   - 单击地图区域，按需加载下级地图并更新 geo.map 实现钻取
+   - 双击地图（@dblclick）触发 revertMap() 返回全国视图
+3. 数据可视化
+   - effectScatter 系列绘制散点涟漪动画展示用户分布
+   - visualMap 组件控制颜色映射，展示数值高低分布
+4. 自适应
+   - screenAdapter 监听 resize，动态计算标题/图例字体大小适配屏幕
+-->
 <template>
   <div class="page">
     <div class="echarts-container" ref="chartRef" id="myEcharts" @dblclick="revertMap"></div>

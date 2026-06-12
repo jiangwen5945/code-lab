@@ -1,7 +1,19 @@
-<!-- 
- 小结：
- 1. defineAsyncComponent
- 2. IntersectionObserver
+<!--
+核心逻辑：
+
+1. 主要 CSS 技术/视觉机制
+   - 利用 perspective 建立 3D 视场，transform-style: preserve-3d 保留子元素 3D 空间
+   - 6 张卡片通过 nth-child 分别设置 rotateY(0/60/120/180/240/300deg) + translateZ 前推，形成环绕圆柱排列
+   - @keyframes cardRotate 逐帧旋转 -60deg 步进，实现自动轮播，hover 时动画暂停
+2. 交互方式
+   - hover 时 animation-play-state: paused 暂停轮播，方便查看
+   - 纯 CSS 实现，无需 JS 交互
+3. 结构要点
+   - .container 提供 perspective 视场，.card-box 为旋转容器，.card 为每个卡片面
+   - 6 个 .card 均匀分布在 360° 圆柱上，CSS 自定义属性 --tz 控制圆柱半径
+4. 其他要点
+   - -webkit-box-reflect 实现卡片倒影效果，增加立体感
+   - cubic-bezier(0.77, 0, 0.175, 1) 缓动函数使轮播节奏更自然
 -->
 <template>
     <div class="page-cell flex-cc">

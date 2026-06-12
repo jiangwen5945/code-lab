@@ -1,3 +1,15 @@
+<!--
+核心逻辑：
+
+1. 滚动无限加载
+   - 使用 IntersectionObserver 监听底部 loading 元素
+   - 进入视口时批量生成随机图片 URL 追加到列表
+2. 瀑布流布局
+   - 使用 CSS column-count: 5 实现多列瀑布流
+   - 图片来自 picsum.photos 随机尺寸生成
+3. 加载状态反馈
+   - 使用 Element Plus Loading 图标 + 旋转动画
+-->
 <template>
     <div class="page-cell">
         <div class="waterfall">

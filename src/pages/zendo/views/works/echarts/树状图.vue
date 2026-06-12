@@ -1,3 +1,18 @@
+<!--
+核心逻辑：
+
+1. 树图展示企业股权结构
+   - 使用 tree 系列展示多层企业控股关系
+   - 支持 expandAndCollapse 折叠展开，roam 缩放漫游
+2. 扁平数据转树形
+   - buildTree() 基于 parentId 将扁平企业列表递归转换为树结构
+   - 通过哈希表缓存节点引用，支持同一节点出现在多个父级下（如合资公司X）
+3. tooltip 异步加载
+   - tooltip.formatter 中使用回调 + mockGetData 异步获取占股比例数据
+   - 通过 ticket 机制控制异步加载状态，显示 Loading... 过渡
+4. 高亮交互
+   - emphasis.focus: 'ancestor' 悬浮节点时聚焦高亮所有祖先节点
+-->
 <template>
     <div class="page">
         <div class="echarts-container" ref="chartRef"></div>

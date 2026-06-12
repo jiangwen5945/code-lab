@@ -1,3 +1,24 @@
+<!--
+核心逻辑：
+
+1. 主要 CSS 技术/视觉机制
+   - 展示 9 种不同的 CSS 文字特效，每个 h1:nth-child 对应一种效果：
+     1. -webkit-box-reflect 倒影效果
+     2. -webkit-text-stroke 描边 + text-shadow 彩色偏移
+     3. text-decoration: line-through 删除线创意效果
+     4. 多层 text-shadow 叠加实现 3D 浮雕字
+     5. background-clip: text + 渐变背景实现文字半色分割
+     6. text-shadow 模糊效果
+     7. 双色 text-shadow 实现浮雕立体感
+     8. mask: radial-gradient 点阵遮罩效果
+     9. background-position 渐变色流动动画
+2. 交互方式
+   - 纯展示，无交互（第 9 种渐变动画自动播放）
+3. 结构要点
+   - .page-cell 使用 CSS Grid 布局（repeat(auto-fill, 400px)）排列 9 个 h1
+4. 其他要点
+   - 涵盖 text-shadow、background-clip、mask、box-reflect、text-stroke 等多种文字处理技术
+-->
 <script>
 export default {
   cover: 'https://iili.io/JqJOqRS.png',

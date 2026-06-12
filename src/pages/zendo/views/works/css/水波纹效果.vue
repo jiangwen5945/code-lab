@@ -1,3 +1,20 @@
+<!--
+核心逻辑：
+
+1. 主要 CSS 技术/视觉机制
+   - 使用 SVG <path> 定义波浪曲线，<use> 重复 4 层引用同一路径
+   - 每层不同透明度（0.7/0.5/0.3/1）及不同 animation-duration（7s/10s/13s/20s）和 delay
+   - @keyframes move-forever 水平平移波浪路径，视差叠加形成水波动画
+2. 交互方式
+   - 纯 CSS 自动播放，无需 JS 交互
+3. 结构要点
+   - SVG viewBox="0 24 150 28"，preserveAspectRatio="none" 水平拉伸填满
+   - 背景使用 linear-gradient(60deg) 紫色到青色渐变
+   - 4 层 <use> 分别偏移 y 轴（0/3/5/7）增加层次感
+4. 其他要点
+   - 移动端 @media (max-width: 768px) 压缩波浪高度至 40px
+   - min-height: 100px 确保波浪不会被完全压扁
+-->
 <template>
     <div class="page">
         <div class="inner-header flex-cc">

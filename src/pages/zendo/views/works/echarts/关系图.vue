@@ -1,3 +1,17 @@
+<!--
+核心逻辑：
+
+1. 家庭关系网络图
+   - 使用 graph 系列（layout: 'none'）手动布局节点坐标，展示家庭成员关系
+   - 节点为家庭成员（姜文、姜发航等），边标注关系类型（父子/夫妻/兄弟/母子/叔侄等）
+2. 交互方式
+   - roam: true 支持拖拽平移和缩放，scaleLimit 限制缩放范围（0.4~2）
+   - 边线条带 curveness: 0.3 曲率，edgeLabel 显示关系文本标签
+3. 数据流
+   - 节点和边数据为硬编码静态对象，categories 用于图例分类
+4. 其他要点
+   - 监听 window.resize 实现图表自适应
+-->
 <template>
     <div class="page">
         <div class="echarts-container" ref="graphChartRef"></div>

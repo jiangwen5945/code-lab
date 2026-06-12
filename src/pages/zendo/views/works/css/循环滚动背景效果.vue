@@ -1,3 +1,20 @@
+<!--
+核心逻辑：
+
+1. 主要 CSS 技术/视觉机制
+   - ::before 伪元素创建 150vmax 超大背景层，使用 SVG 图案平铺并旋转 45deg
+   - @keyframes bg 通过 background-position 垂直偏移（0 到 -200px）实现无限滚动循环
+   - 文本使用 CSS Grid 叠加在背景层之上（grid-area: body 共享网格区域）
+2. 交互方式
+   - 纯 CSS 自动播放动画
+   - prefers-reduced-motion 媒体查询尊重系统动画减弱设置，动画时长设为 0
+3. 结构要点
+   - .app-content 使用 display: grid + place-items/place-content: center 居中
+   - ::before 伪元素作为背景层，h1.text 作为前景层叠加
+4. 其他要点
+   - CSS 自定义属性 $--bg-size: 200px 控制平铺尺寸
+   - font-size 使用 clamp(48px, 10vmin, 96px) 响应式字体
+-->
 <script>
 export default {
     link: 'https://juejin.cn/post/7159380028417277966',

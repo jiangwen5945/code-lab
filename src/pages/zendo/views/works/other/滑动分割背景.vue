@@ -1,3 +1,14 @@
+<!--
+核心逻辑：
+
+1. 鼠标滑动分割效果
+   - 监听 window 的 mousemove 事件获取鼠标 X 坐标
+   - 根据 (clientX / innerWidth) * 100% 动态计算左面板宽度
+   - 左右两侧分别使用深色和浅色背景形成视觉对比
+2. 实时 DOM 操作
+   - 直接操作 #left-side 元素的 style.width 属性
+   - 无需第三方库，纯原生 JS 实现
+-->
 <script setup>
 import { onMounted, onUnmounted } from 'vue'
 onMounted(() => {
@@ -12,6 +23,7 @@ const mousemove = (e) => {
   left.style.width = `${(e.clientX / window.innerWidth) * 100}%`
 }
 </script>
+
 <template>
   <div class="page-cell">
     <div id="left-side" class="side">

@@ -1,3 +1,17 @@
+<!--
+核心逻辑：
+
+1. 双雷达图对比展示
+   - 两个 radar 系列分别展示抖音和微博在 70后~10后 五个年龄段的受欢迎程度
+   - 使用 Canvas 生成水印文字（'jw'）作为图表背景图案（backgroundColor: pattern）
+2. 图表联动
+   - 通过 echarts.connect([myChart1, myChart2]) 关联两个实例
+   - 图例悬浮提示、高亮等交互在两个图表间同步联动
+3. 数据流
+   - 数据为硬编码静态数组，直接配置在 option.series[0].data 中
+4. 布局
+   - 使用 CSS Grid 实现左右并排双列布局
+-->
 <template>
     <div class="echarts-container">
         <div class="cell" ref="chart1"></div>
