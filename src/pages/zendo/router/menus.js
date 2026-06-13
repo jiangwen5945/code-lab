@@ -12,7 +12,8 @@ for (const path in routeFiles) {
     name: routerName,
     component: routeFiles[path],
     meta: {
-      category
+      category,
+      icon: routerName === 'Home' ? 'House' : undefined
     }
   }
   localMenus.push(element)
