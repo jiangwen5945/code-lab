@@ -1,1 +1,0 @@
-import{_ as c,e as s,F as r,k as i,o as t,af as _,f as o,i as n,t as d,b2 as l}from"./index-BrMQvGUu.js";const f={},p={class:"page-cell"};function v(m,u){const a=l("slide-in");return t(),s("div",p,[(t(),s(r,null,i(10,e=>_(o("div",{class:"item",key:e},[n(d(e),1)]),[[a]])),64))])}const x=c(f,[["render",v],["__scopeId","data-v-d2dd3ef9"]]);export{x as default};

@@ -1,0 +1,1 @@
+import{_ as t,ad as r,e as o,b9 as a,o as c}from"./index-yErA5vTz.js";const s={},n={class:"page"};function _(i,l){const e=a("waterMarker");return r((c(),o("div",n,null,512)),[[e,{text:"JiangWen版权所有",font:"14px Microsoft JhengHei",textColor:"rgba(180, 180, 180, 0.4)"}]])}const d=t(s,[["render",_]]);export{d as default};
