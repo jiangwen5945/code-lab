@@ -4,6 +4,7 @@ import { useZendoStore } from '../stores/zendo.js'
 import ToggleTheme from '@/components/ToggleTheme.vue';
 import { useRouter } from 'vue-router'
 import CodeDrawer from './CodeDrawer.vue'
+import UserInfo from './UserInfo.vue'
 
 const router = useRouter();
 // 获取当前路由
@@ -29,7 +30,6 @@ const handleLink = () => {
     window.open(href, '_blank')
 }
 
-const baseUrl = import.meta.env.BASE_URL
 </script>
 
 <template>
@@ -66,10 +66,7 @@ const baseUrl = import.meta.env.BASE_URL
                 <ToggleTheme />
             </div>
 
-            <div class="avatar-box">
-                <el-avatar :src="`${baseUrl}avatar.jpg`"></el-avatar>
-                <span class="username">jiangwen</span>
-            </div>
+            <UserInfo />
         </div>
 
     </div>
@@ -115,17 +112,6 @@ const baseUrl = import.meta.env.BASE_URL
         display: flex;
         align-items: center;
         margin-right: 20px;
-
-        .avatar-box {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .username {
-            font-size: 12px;
-            margin-left: 8px;
-        }
 
         .theme-box {
             font-size: 20px;

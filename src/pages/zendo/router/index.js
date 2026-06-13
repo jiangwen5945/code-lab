@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import { useZendoStore } from '../stores/zendo'
 import Layout from '../views/Layout.vue'
 import menuList from './menus'
 console.log('menuList', menuList);
@@ -13,7 +14,7 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: () => import('../views/LoginView.vue')
+    component: () => import('../views/Login.vue')
   },
   {
     path: '/:pathMatch(.*)*',
@@ -29,6 +30,16 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes
+})
+
+router.beforeEach((to, from) => {
+  const zendoStore = useZendoStore()
+  if (zendoStore.isAuthenticated && to.name === 'login') {
+    return { name: 'home' }
+  }
+  if (!zendoStore.isAuthenticated && to.name !== 'login') {
+    return { name: 'login' }
+  }
 })
 
 router.beforeResolve((to, from) => {

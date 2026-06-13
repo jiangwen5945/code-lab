@@ -36,6 +36,26 @@ let menuList = menus.reduce((acc, item) => {
 
 export const useZendoStore = defineStore('zendo', {
   state: () => {
+    let token = ''
+    let userInfo = null
+
+    const storedToken = localStorage.getItem('zendo_token')
+    const storedUser = localStorage.getItem('zendo_user')
+    const expiry = localStorage.getItem('zendo_token_expiry')
+
+    if (storedToken && expiry && Date.now() < Number(expiry)) {
+      token = storedToken
+      userInfo = JSON.parse(storedUser || 'null')
+    } else {
+      token = sessionStorage.getItem('zendo_token') || ''
+      userInfo = JSON.parse(sessionStorage.getItem('zendo_user') || 'null')
+      if (storedToken) {
+        localStorage.removeItem('zendo_token')
+        localStorage.removeItem('zendo_user')
+        localStorage.removeItem('zendo_token_expiry')
+      }
+    }
+
     return {
       isCollapse: false,
       menuList,
@@ -50,7 +70,12 @@ export const useZendoStore = defineStore('zendo', {
       ],
       hasSeenWelcome: localStorage.getItem('zendo_hasSeenWelcome') === 'true',
       hasSeenTour: localStorage.getItem('zendo_hasSeenTour') === 'true',
+      token,
+      userInfo,
     }
+  },
+  getters: {
+    isAuthenticated: (state) => !!state.token,
   },
   actions: {
     // 切换侧边菜单栏折叠
@@ -92,6 +117,37 @@ export const useZendoStore = defineStore('zendo', {
     setTourSeen() {
       this.hasSeenTour = true
       localStorage.setItem('zendo_hasSeenTour', 'true')
+    },
+
+    // 登录
+    setToken(token, remember = true) {
+      this.token = token
+      if (remember) {
+        localStorage.setItem('zendo_token', token)
+        localStorage.setItem('zendo_token_expiry', String(Date.now() + 30 * 24 * 60 * 60 * 1000))
+      } else {
+        sessionStorage.setItem('zendo_token', token)
+      }
+    },
+
+    setUserInfo(user, remember = true) {
+      this.userInfo = user
+      if (remember) {
+        localStorage.setItem('zendo_user', JSON.stringify(user))
+      } else {
+        sessionStorage.setItem('zendo_user', JSON.stringify(user))
+      }
+    },
+
+    // 登出
+    logout() {
+      this.token = ''
+      this.userInfo = null
+      localStorage.removeItem('zendo_token')
+      localStorage.removeItem('zendo_user')
+      localStorage.removeItem('zendo_token_expiry')
+      sessionStorage.removeItem('zendo_token')
+      sessionStorage.removeItem('zendo_user')
     }
   }
 })
