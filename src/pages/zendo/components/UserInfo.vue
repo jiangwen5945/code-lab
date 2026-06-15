@@ -7,8 +7,8 @@ const zendoStore = useZendoStore()
 
 const baseUrl = import.meta.env.BASE_URL
 
-function handleLogout() {
-  zendoStore.logout()
+async function handleLogout() {
+  await zendoStore.logout()
   router.replace('/login')
 }
 </script>

@@ -32,8 +32,13 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, from) => {
+router.beforeEach(async (to, from) => {
   const zendoStore = useZendoStore()
+
+  if (!zendoStore.sessionReady) {
+    await zendoStore.initSession()
+  }
+
   if (zendoStore.isAuthenticated && to.name === 'login') {
     return { name: 'home' }
   }

@@ -35,8 +35,12 @@ onMounted(() => {
   }
 })
 
-function onWelcomeClose() {
+function onStartExplore() {
   zendoStore.setWelcomeSeen()
+  showWelcome.value = false
+}
+
+function onWelcomeClose() {
   nextTick(() => {
     if (!zendoStore.hasSeenTour) {
       showTour.value = true
@@ -44,7 +48,7 @@ function onWelcomeClose() {
   })
 }
 
-function onTourClose() {
+function onTourFinish() {
   zendoStore.setTourSeen()
 }
 
@@ -119,13 +123,13 @@ export default {
     </div>
     <template #footer>
       <div class="welcome-footer">
-        <el-button type="warning" @click="showWelcome = false" size="large">开始探索</el-button>
+        <el-button type="warning" @click="onStartExplore" size="large">开始探索</el-button>
       </div>
     </template>
   </el-dialog>
 
    <!-- 首次登录使用引导 --> 
-  <el-tour v-model="showTour" :contentStyle="{ maxWidth: '320px' }" @close="onTourClose">
+  <el-tour v-model="showTour" :contentStyle="{ maxWidth: '320px' }" @finish="onTourFinish">
     <el-tour-step
       target="#tour-link"
       title="独立窗口打开"

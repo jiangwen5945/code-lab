@@ -126,13 +126,13 @@
 
       <form class="form" @submit.prevent="handleSubmit">
         <div class="field">
-          <label for="username">用户名</label>
+          <label for="email">邮箱</label>
           <input
-            id="username"
-            v-model="username"
-            type="text"
-            autocomplete="username"
-            placeholder="请输入用户名"
+            id="email"
+            v-model="email"
+            type="email"
+            autocomplete="email"
+            placeholder="请输入邮箱"
             @focus="onEmailFocus"
             @blur="onEmailBlur"
           >
@@ -236,7 +236,7 @@ import 'element-plus/es/components/message/style/css'
 import { ElMessage } from 'element-plus'
 import { useZendoStore } from '@/pages/zendo/stores/zendo'
 
-const username = ref('')
+const email = ref('')
 const password = ref('')
 const showPassword = ref(false)
 const isTyping = ref(false)
@@ -495,34 +495,25 @@ function onRegister() {
 }
 
 async function handleGuestLogin() {
-  username.value = 'guest'
+  email.value = 'guest@example.com'
   password.value = '123456'
   await handleSubmit()
 }
 
 async function handleSubmit() {
   errorMsg.value = ''
-  if (!username.value || !password.value) {
-    errorMsg.value = '请输入用户名和密码'
+  if (!email.value || !password.value) {
+    errorMsg.value = '请输入邮箱和密码'
     return
   }
   loading.value = true
   try {
-    const res = await fetch('https://mock-worker.jiangwen.workers.dev/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username: username.value, password: password.value }),
-    })
-    const json = await res.json()
-    if (json.code !== 0) {
-      errorMsg.value = json.message || '登录失败，请重试'
-      return
-    }
-    zendoStore.setToken(json.data.token, remember.value)
-    zendoStore.setUserInfo(json.data.user, remember.value)
+    await zendoStore.login(email.value, password.value)
     router.replace('/home')
-  } catch {
-    errorMsg.value = '网络错误，请检查连接后重试'
+  } catch (err) {
+    errorMsg.value = err.message === 'Invalid login credentials'
+      ? '邮箱或密码错误'
+      : (err.message || '登录失败，请重试')
   } finally {
     loading.value = false
   }
