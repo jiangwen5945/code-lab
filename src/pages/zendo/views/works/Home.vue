@@ -37,7 +37,7 @@ const code = `const developer = {
   }
 }
 
-console.log(developer.__proto__ === FrontendDeveloper.prototype) // 输出：true
+console.log(developer.__proto__ === Bug.prototype) // 输出：true
 `
 
 function highlight(code) {
