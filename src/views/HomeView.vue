@@ -1,14 +1,12 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
 import CodeCard from '@/components/CodeCard.vue'
+import IframeModal from '@/components/IframeModal.vue'
 
 const baseUrl = import.meta.env.BASE_URL
 
 const preloaderHide = ref(false)
-
-function openTerminal() {
-  window.open('https://jiangwen.site/terminal-portfolio/', '_blank')
-}
+const showTerminal = ref(false)
 
 const typewriterText = ref('')
 
@@ -105,6 +103,14 @@ function handleWorkClick(item) {
   }
   const target = isMobile.value ? '电脑' : '手机'
   showToast(`请在${ target }端打开此项目`)
+}
+
+function handleCodeCardClick() {
+  if (isMobile.value) {
+    window.open('https://jiangwen.site/terminal-portfolio/', '_blank')
+  } else {
+    showTerminal.value = true
+  }
 }
 
 const services = [
@@ -223,6 +229,8 @@ onUnmounted(() => {
       <div class="spinner"></div>
     </div>
 
+    <IframeModal :visible="showTerminal" src="https://jiangwen.site/terminal-portfolio/" @close="showTerminal = false" />
+
     <div class="image-container">
       <div class="background-img"></div>
     </div>
@@ -231,7 +239,7 @@ onUnmounted(() => {
       <div class="content-area-inner">
         <section id="intro">
           <div class="container-mid">
-            <div class="animation-container animation-fade-down cursor-pointer" data-animation-delay="300" @click="openTerminal">
+            <div class="animation-container animation-fade-down cursor-pointer" data-animation-delay="300" @click="handleCodeCardClick">
               <CodeCard/>
             </div>
             <div class="animation-container animation-fade-left" data-animation-delay="300">
