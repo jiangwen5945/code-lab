@@ -1,0 +1,1 @@
+import{_ as c,b as s,d as o,w as r,j as _,r as d,o as a}from"./index-fyA8vNKX.js";const i={},l={class:"page-cell flex-cc"},n={class:"box"},b={class:"draggable-box"};function v(f,e){const t=d("draggable");return a(),s("div",l,[o("div",n,[r((a(),s("div",b,e[0]||(e[0]=[_("可拖拽盒子1")]))),[[t]])])])}const x=c(i,[["render",v],["__scopeId","data-v-acb1b0e9"]]);export{x as default};
