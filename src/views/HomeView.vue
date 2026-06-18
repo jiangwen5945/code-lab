@@ -1,7 +1,5 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
-import { ArrowDown } from '@element-plus/icons-vue'
-import { ElMessage } from 'element-plus'
 import CodeCard from '@/components/CodeCard.vue'
 
 const baseUrl = import.meta.env.BASE_URL
@@ -69,11 +67,31 @@ const breakpointHandler = () => {
 }
 
 function showToast(msg) {
-  ElMessage({
-    message: msg,
-    duration: 2500,
-    customClass: 'toast-message'
+  const el = document.createElement('div')
+  el.textContent = msg
+  el.className = 'toast-message'
+  Object.assign(el.style, {
+    position: 'fixed',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    background: 'rgba(0,0,0,0.75)',
+    color: '#fff',
+    padding: '12px 24px',
+    borderRadius: '8px',
+    fontFamily: 'var(--font-primary, serif)',
+    zIndex: 9999,
+    fontSize: '14px',
+    lineHeight: '1.4',
+    textAlign: 'center',
+    pointerEvents: 'none',
+    transition: 'opacity 0.3s'
   })
+  document.body.appendChild(el)
+  setTimeout(() => {
+    el.style.opacity = '0'
+    setTimeout(() => el.remove(), 300)
+  }, 2500)
 }
 
 function handleWorkClick(item) {
@@ -226,7 +244,7 @@ onUnmounted(() => {
                 class="btn-more"
               >
                 个人作品集
-                <el-icon><ArrowDown /></el-icon>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
               </a>
             </div>
           </div>
@@ -245,7 +263,7 @@ onUnmounted(() => {
         <section id="work">
           <h3 class="headline scroll-animated-from-right">我的作品</h3>
           <div class="showcase">
-            <div v-for="item in works" :key="item.title" class="item scroll-animated-from-right">
+            <div v-for="item in works" :key="item.title" class="item scroll-animated-from-right" v-hover3d>
               <div class="work-link" @click="handleWorkClick(item)">
                 <div class="info">
                   <div class="container-mid">
@@ -466,8 +484,7 @@ onUnmounted(() => {
       background: transparent;
       transition: all 0.3s ease;
 
-      .el-icon {
-        font-size: 16px;
+      svg {
         transition: transform 0.3s ease;
       }
 
@@ -475,7 +492,7 @@ onUnmounted(() => {
         background: var(--color-black);
         color: var(--color-white);
 
-        .el-icon {
+        svg {
           animation: btn-more-bounce 1s ease infinite;
         }
       }
@@ -490,6 +507,10 @@ onUnmounted(() => {
 /* 入场动画 */
 .animation-container {
   transition: 0.5s ease;
+
+  display: flex;
+  justify-content: center;
+  width: 100%;
 
   &.animation-fade-up {
     transform: translateY(10vh);
@@ -940,11 +961,5 @@ onUnmounted(() => {
   50% { transform: translateY(4px); }
 }
 
-:global(.toast-message) {
-  background: rgba(0, 0, 0, 0.75) !important;
-  color: #fff !important;
-  border-radius: 8px !important;
-  font-family: var(--font-primary, serif) !important;
-  border: none !important;
-}
+
 </style>

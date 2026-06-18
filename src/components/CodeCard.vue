@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import hljs from 'highlight.js'
 
 const defaultCode = `const developer = {
@@ -12,17 +12,6 @@ const defaultCode = `const developer = {
 }
 `
 
-const titleMap = {
-  javascript: 'about.js',
-  typescript: 'about.ts',
-  python: 'about.py',
-  html: 'about.html',
-  css: 'about.css',
-  vue: 'about.vue',
-  json: 'about.json',
-  bash: 'about.sh',
-}
-
 const props = defineProps({
   code: {
     type: String,
@@ -31,14 +20,12 @@ const props = defineProps({
   language: {
     type: String,
     default: 'javascript'
+  },
+  titleText: {
+    type: String,
+    default: 'about.js'
   }
 })
-
-const card = ref(null)
-const yRange = [-10, 10]
-const xRange = [-10, 10]
-
-const titleText = computed(() => titleMap[props.language] || `about.${props.language}`)
 
 const highlightedCode = computed(() => {
   if (hljs.getLanguage(props.language)) {
@@ -46,28 +33,10 @@ const highlightedCode = computed(() => {
   }
   return hljs.highlightAuto(props.code).value
 })
-
-const getRotate = (range, value, max) => {
-  return (value / max) * (range[1] - range[0]) + range[0]
-}
-
-const onMouseMove = (e) => {
-  const { offsetX, offsetY } = e
-  const { offsetWidth, offsetHeight } = card.value
-  const ry = -getRotate(yRange, offsetX, offsetWidth)
-  const rx = getRotate(xRange, offsetY, offsetHeight)
-  card.value.style.setProperty('--rx', `${rx}deg`)
-  card.value.style.setProperty('--ry', `${ry}deg`)
-}
-
-const onMouseLeave = () => {
-  card.value.style.setProperty('--rx', '0deg')
-  card.value.style.setProperty('--ry', '0deg')
-}
 </script>
 
 <template>
-  <div class="card" ref="card" @mousemove="onMouseMove" @mouseleave="onMouseLeave">
+  <div class="card" v-hover3d>
     <div class="mac-window">
       <div class="title-bar">
         <div class="traffic-lights">
@@ -93,8 +62,7 @@ $text-code: #cdd6f4;
 $font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', 'JetBrains Mono', monospace;
 
 .card {
-  // width: clamp(500px, 60%, 700px);
-  width: 500px;
+  width: clamp(400px, 30vw, 800px);
   border-radius: 12px;
   box-shadow: rgba(0, 0, 0, 0.5) 0px 20px 30px -10px;
   transition: all 0.3s linear;
