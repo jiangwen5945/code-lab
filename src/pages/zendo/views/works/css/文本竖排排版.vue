@@ -1,3 +1,16 @@
+<!--
+核心逻辑：
+
+1. CSS 古典竖排排版
+   - 使用 writing-mode: vertical-lr 实现古诗词竖排从左到右显示
+   - 搭配 Ma Shan Zheng 行书字体营造传统韵味
+   - text-align: justify 实现文字分散排列
+2. 静态内容展示
+   - 竖排滚动展示《滕王阁序》全文，分为 8 段（含末尾诗）
+   - 点击任一段落 → 弹出模态面板，显示该段原文 + 现代汉语翻译
+   - 点击遮罩层或 ✕ 按钮关闭面板
+-->
+
 <template>
   <div class="page-cell flex-cc">
     <div class="scroll-wrap">
