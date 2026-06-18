@@ -10,6 +10,8 @@ const defaultCode = `const developer = {
     return '欢迎来到我的代码实验室🧪'
   }
 }
+
+// 点击代码卡片，进入 Terminal 交互终端 →
 `
 
 const props = defineProps({
