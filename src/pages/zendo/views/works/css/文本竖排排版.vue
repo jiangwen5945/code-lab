@@ -1,45 +1,276 @@
-<!--
-核心逻辑：
-
-1. CSS 古典竖排排版
-   - 使用 writing-mode: vertical-rl 实现古诗词竖排从右到左显示
-   - 搭配 Ma Shan Zheng 行书字体营造传统韵味
-   - text-align: justify 实现文字分散排列
-2. 静态内容展示
-   - 直接展示《临江仙》全词，无交互逻辑
-   - 纯 CSS 样式驱动，无需 JavaScript
--->
 <template>
-    <div class="page-cell flex-cc">
-        <div class="t">
-            <h2>临江仙</h2>
-            <p>滚滚长江东逝水</p>
-            <p>浪花淘尽英雄</p>
-            <p>是非成败转头空</p>
-            <p>青山依旧在</p>
-            <p>几度夕阳红</p>
-            <p>白发渔樵江渚上</p>
-            <p>惯看秋月春风</p>
-            <p>一壶浊酒喜相逢</p>
-            <p>古今多少事</p>
-            <p>都付笑谈中</p>
-        </div>
+  <div class="page-cell flex-cc">
+    <div class="scroll-wrap">
+      <div class="t">
+        <header>
+          <h1>滕王阁序</h1>
+          <p class="author">唐 · 王勃</p>
+        </header>
+
+        <section @click="showSection(0)">
+          <p>豫章故郡，洪都新府。星分翼轸，地接衡庐。襟三江而带五湖，控蛮荆而引瓯越。物华天宝，龙光射牛斗之墟；人杰地灵，徐孺下陈蕃之榻。雄州雾列，俊采星驰。台隍枕夷夏之交，宾主尽东南之美。都督阎公之雅望，棨戟遥临；宇文新州之懿范，襜帷暂驻。十旬休假，胜友如云；千里逢迎，高朋满座。腾蛟起凤，孟学士之词宗；紫电青霜，王将军之武库。家君作宰，路出名区；童子何知，躬逢胜饯。</p>
+        </section>
+
+        <section @click="showSection(1)">
+          <p>时维九月，序属三秋。潦水尽而寒潭清，烟光凝而暮山紫。俨骖騑于上路，访风景于崇阿；临帝子之长洲，得天人之旧馆。层峦耸翠，上出重霄；飞阁流丹，下临无地。鹤汀凫渚，穷岛屿之萦回；桂殿兰宫，即冈峦之体势。</p>
+        </section>
+
+        <section @click="showSection(2)">
+          <p>披绣闼，俯雕甍，山原旷其盈视，川泽纡其骇瞩。闾阎扑地，钟鸣鼎食之家；舸舰弥津，青雀黄龙之舳。云销雨霁，彩彻区明。落霞与孤鹜齐飞，秋水共长天一色。渔舟唱晚，响穷彭蠡之滨；雁阵惊寒，声断衡阳之浦。</p>
+        </section>
+
+        <section @click="showSection(3)">
+          <p>遥襟甫畅，逸兴遄飞。爽籁发而清风生，纤歌凝而白云遏。睢园绿竹，气凌彭泽之樽；邺水朱华，光照临川之笔。四美具，二难并。穷睇眄于中天，极娱游于暇日。天高地迥，觉宇宙之无穷；兴尽悲来，识盈虚之有数。望长安于日下，目吴会于云间。地势极而南溟深，天柱高而北辰远。关山难越，谁悲失路之人？萍水相逢，尽是他乡之客。怀帝阍而不见，奉宣室以何年？</p>
+        </section>
+
+        <section @click="showSection(4)">
+          <p>呜呼！时运不齐，命途多舛。冯唐易老，李广难封。屈贾谊于长沙，非无圣主；窜梁鸿于海曲，岂乏明时？所赖君子见机，达人知命。老当益壮，宁移白首之心？穷且益坚，不坠青云之志。酌贪泉而觉爽，处涸辙以犹欢。北海虽赊，扶摇可接；东隅已逝，桑榆非晚。孟尝高洁，空余报国之情；阮籍猖狂，岂效穷途之哭！</p>
+        </section>
+
+        <section @click="showSection(5)">
+          <p>勃，三尺微命，一介书生。无路请缨，等终军之弱冠；有怀投笔，慕宗悫之长风。舍簪笏于百龄，奉晨昏于万里。非谢家之宝树，接孟氏之芳邻。他日趋庭，叨陪鲤对；今兹捧袂，喜托龙门。杨意不逢，抚凌云而自惜；钟期既遇，奏流水以何惭？</p>
+        </section>
+
+        <section @click="showSection(6)">
+          <p>呜乎！胜地不常，盛筵难再；兰亭已矣，梓泽丘墟。临别赠言，幸承恩于伟饯；登高作赋，是所望于群公。敢竭鄙怀，恭疏短引；一言均赋，四韵俱成。请洒潘江，各倾陆海云尔。</p>
+        </section>
+
+        <section class="footer" @click="showSection(7)">
+          <p>滕王高阁临江渚，佩玉鸣鸾罢歌舞。</p>
+          <p>画栋朝飞南浦云，珠帘暮卷西山雨。</p>
+          <p>闲云潭影日悠悠，物换星移几度秋。</p>
+          <p>阁中帝子今何在？槛外长江空自流。</p>
+        </section>
+      </div>
     </div>
+    <!-- 原文翻译 -->
+    <Teleport to="body">
+      <div v-if="showTranslation" class="translation-overlay" @click.self="showTranslation = false">
+        <div class="translation-panel">
+          <span class="close-btn" @click="showTranslation = false">✕</span>
+          <h2>《滕王阁序》· 第 {{ currentIndex + 1 }} 段</h2>
+          <div class="translation-list">
+            <div class="translation-item" :key="currentIndex">
+              <p class="original">{{ translations[currentIndex].original }}</p>
+              <p class="translated">{{ translations[currentIndex].translated }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Teleport>
+  </div>
 </template>
 
-<style lang="scss" scoped>
-// @import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap');
-// @import url('../../assets/fonts/googleapis.css');
-.t {
-    font-family: "Ma Shan Zheng", cursive;
-    font-size: 50px;
-    text-align: justify; // 文字分散排列
-    text-align-last: justify; // 最后一行文字分散排列
-    writing-mode: vertical-rl; // 文字排列方向
-    height: 60vh;
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const showTranslation = ref(false)
+const currentIndex = ref(0)
+
+function showSection(index: number) {
+  currentIndex.value = index
+  showTranslation.value = true
 }
 
-h2, p {
-    margin-left: 30px;
+const translations = [
+  {
+    original: '豫章故郡，洪都新府。星分翼轸，地接衡庐。襟三江而带五湖，控蛮荆而引瓯越。物华天宝，龙光射牛斗之墟；人杰地灵，徐孺下陈蕃之榻。雄州雾列，俊采星驰。台隍枕夷夏之交，宾主尽东南之美。都督阎公之雅望，棨戟遥临；宇文新州之懿范，襜帷暂驻。十旬休假，胜友如云；千里逢迎，高朋满座。腾蛟起凤，孟学士之词宗；紫电青霜，王将军之武库。家君作宰，路出名区；童子何知，躬逢胜饯。',
+    translated: '这里是汉代的豫章郡，如今是洪州都督府。天上的方位属翼星、轸星的分野，地上的位置连结着衡山和庐山。以三江为衣襟，以五湖为衣带，控制着楚地，连接着闽越。物产华美有天生的珍宝，龙泉剑光直射牛宿、斗宿之间；人杰地灵，徐孺子在陈蕃家下榻。雄伟的州郡像云雾般聚集，杰出的人才如流星般奔驰。城池倚据在中原和蛮夷的交界处，主宾都是东南地区的俊杰。都督阎公享有美好的声望，仪仗远临；宇文新州是美好的楷模，车驾暂时停驻。正值十日一休的假日，好友如云；千里迎接宾客，高朋满座。文采飞扬，孟学士是文坛宗主；紫电青霜，王将军是军事名家。家父做县令，我因探亲经过这有名的地方；我年幼无知，却有幸参加了这场盛大的宴会。',
+  },
+  {
+    original: '时维九月，序属三秋。潦水尽而寒潭清，烟光凝而暮山紫。俨骖騑于上路，访风景于崇阿；临帝子之长洲，得天人之旧馆。层峦耸翠，上出重霄；飞阁流丹，下临无地。鹤汀凫渚，穷岛屿之萦回；桂殿兰宫，即冈峦之体势。',
+    translated: '时值九月，深秋时节。积水消尽，寒潭清澈，烟光凝聚，暮山呈现紫色。驾着车马在高高的道路上，寻访美景于高山之巅；来到滕王营建的长洲，见到当年天子的旧馆。层层山峦耸立着翠色，上达云霄；凌空的楼阁涂饰鲜红，下临深渊。白鹤栖息的水滨，小洲极尽岛屿萦绕之致；桂木兰木装饰的宫殿，依着山冈的形势而建。',
+  },
+  {
+    original: '披绣闼，俯雕甍，山原旷其盈视，川泽纡其骇瞩。闾阎扑地，钟鸣鼎食之家；舸舰弥津，青雀黄龙之舳。云销雨霁，彩彻区明。落霞与孤鹜齐飞，秋水共长天一色。渔舟唱晚，响穷彭蠡之滨；雁阵惊寒，声断衡阳之浦。',
+    translated: '推开雕饰精美的门，俯视雕镂华丽的屋脊，山川平原空旷得充满视野，河流湖泊迂回曲折令人惊异。房屋遍地，是钟鸣鼎食的富贵人家；船只塞满渡口，是雕着青雀黄龙的舟舸。云消雨停，阳光普照，天空明朗。晚霞与孤雁一起飞翔，秋水与长天浑然一色。渔船上传来傍晚的歌声，响彻彭蠡湖畔；雁阵因寒意而惊叫，声音消失在衡阳水边。',
+  },
+  {
+    original: '遥襟甫畅，逸兴遄飞。爽籁发而清风生，纤歌凝而白云遏。睢园绿竹，气凌彭泽之樽；邺水朱华，光照临川之笔。四美具，二难并。穷睇眄于中天，极娱游于暇日。天高地迥，觉宇宙之无穷；兴尽悲来，识盈虚之有数。望长安于日下，目吴会于云间。地势极而南溟深，天柱高而北辰远。关山难越，谁悲失路之人？萍水相逢，尽是他乡之客。怀帝阍而不见，奉宣室以何年？',
+    translated: '胸怀舒畅，飘逸的兴致迅速飞扬。排箫奏起清风徐来，歌声纤柔白云为之停留。像睢园竹林的聚会，酒量豪气盖过彭泽县令；像邺水莲池的盛会，文采光辉映照临川之笔。四美齐聚，两难并存。极目远望天空，在闲暇的日子里尽情游乐。天高地远，感到宇宙的无穷无尽；兴尽悲来，认识到兴衰成败自有定数。望长安于夕阳之下，看吴会于云雾之间。地势尽头南海幽深，天柱高耸北极星遥远。关山重重难以越过，谁来同情迷路之人？萍水相逢，大家都是异乡之客。怀念朝廷却不得觐见，被召见侍奉宣室要等到何年？',
+  },
+  {
+    original: '呜呼！时运不齐，命途多舛。冯唐易老，李广难封。屈贾谊于长沙，非无圣主；窜梁鸿于海曲，岂乏明时？所赖君子见机，达人知命。老当益壮，宁移白首之心？穷且益坚，不坠青云之志。酌贪泉而觉爽，处涸辙以犹欢。北海虽赊，扶摇可接；东隅已逝，桑榆非晚。孟尝高洁，空余报国之情；阮籍猖狂，岂效穷途之哭！',
+    translated: '唉！时运不济，命运多有不顺。冯唐容易衰老，李广难以封侯。贾谊被贬到长沙，并非没有圣明的君主；梁鸿隐居海边，难道不是太平盛世？所依靠的是君子善于把握时机，通达的人知晓命运。年岁老迈应当更加壮志，哪能改变白发之人的心愿？处境艰难反而更加坚定，不放弃青云般的志向。喝了贪泉的水仍觉神清气爽，身处涸辙之中仍然心情欢畅。北海虽然遥远，乘着旋风仍可到达；早年虽然已经过去，晚年努力也不算晚。孟尝品德高洁，徒然怀有报国之心；阮籍放纵不羁，怎能效仿他穷途而哭！',
+  },
+  {
+    original: '勃，三尺微命，一介书生。无路请缨，等终军之弱冠；有怀投笔，慕宗悫之长风。舍簪笏于百龄，奉晨昏于万里。非谢家之宝树，接孟氏之芳邻。他日趋庭，叨陪鲤对；今兹捧袂，喜托龙门。杨意不逢，抚凌云而自惜；钟期既遇，奏流水以何惭？',
+    translated: '我王勃，地位卑微，一个书生。没有请缨报国的机会，虽然年龄与终军弱冠时相同；胸怀投笔从戎的志向，仰慕宗悫乘风破浪的抱负。宁愿舍弃一生的功名仕途，到万里之外侍奉父母。我不是谢家那样的杰出子弟，却有幸结识贤良的邻居。改日到庭院中，将像孔鲤那样接受父亲的教诲；今天举起衣袖谒见，欣喜得以依附龙门。如果遇不到杨得意那样的人，只能抚摸凌云之作而自我叹惜；既然遇到了钟子期那样的知音，演奏一曲流水又有什么可惭愧的呢？',
+  },
+  {
+    original: '呜乎！胜地不常，盛筵难再；兰亭已矣，梓泽丘墟。临别赠言，幸承恩于伟饯；登高作赋，是所望于群公。敢竭鄙怀，恭疏短引；一言均赋，四韵俱成。请洒潘江，各倾陆海云尔。',
+    translated: '唉！名胜之地不能常有，盛大的宴会难以再次遇到；兰亭盛会已经过去，金谷园也成了废墟。临别之际献上几句赠言，有幸承蒙恩宠参加这盛大的饯别；登高作赋，这只能期望在座的各位了。我冒昧地竭尽浅陋的心意，恭敬地写下这篇短序；大家都来作诗，四韵诗都已写成。请各位像潘岳那样挥洒文采，像陆机那样倾泻才华吧。',
+  },
+  {
+    original: '滕王高阁临江渚，佩玉鸣鸾罢歌舞。画栋朝飞南浦云，珠帘暮卷西山雨。闲云潭影日悠悠，物换星移几度秋。阁中帝子今何在？槛外长江空自流。',
+    translated: '高高的滕王阁俯临江边沙洲，佩玉响、鸾铃鸣，歌舞已经结束。画栋早上飞过南浦的云彩，珠帘傍晚卷起西山的烟雨。闲云倒映潭中日影悠悠，景物变换星移几度春秋。阁中的滕王如今在哪里？栏杆外的长江空自流淌不息。',
+  },
+]
+</script>
+
+<style lang="scss" scoped>
+@import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap');
+
+$bg-color: #f5f0e8;
+$text-color: #2c1810;
+$accent: #8b4513;
+
+.scroll-wrap {
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 20px;
+  height: 85vh;
+  cursor: pointer;
+}
+
+.t {
+  font-family: 'Ma Shan Zheng', 'KaiTi', serif;
+  font-size: 32px;
+  line-height: 1.9;
+  color: $text-color;
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  text-align: justify;
+  column-width: 520px;
+  column-gap: 48px;
+  column-rule: 1px dashed rgba($accent, 0.25);
+  padding: 24px 48px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 24px;
+
+  h1 {
+    font-size: 56px;
+    font-weight: normal;
+    letter-spacing: 0.3em;
+    color: $accent;
+  }
+
+  .author {
+    font-size: 20px;
+    opacity: 0.7;
+  }
+}
+
+section {
+  break-inside: avoid;
+  margin-right: 30px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.75;
+  }
+
+  p {
+    margin: 0;
+    text-indent: 2em;
+    font-size: 30px;
+  }
+
+  & section {
+    margin-top: 28px;
+    padding-top: 24px;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba($accent, 0.35), transparent);
+    }
+
+    &::after {
+      content: '◇';
+      position: absolute;
+      top: -7px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 13px;
+      color: rgba($accent, 0.35);
+    }
+  }
+}
+
+.footer {
+  margin-top: 32px;
+  padding-top: 28px;
+  break-inside: avoid;
+  position: relative;
+
+  p {
+    margin: 0;
+    font-size: 26px;
+    color: $accent;
+    letter-spacing: 0.2em;
+    line-height: 2.2;
+  }
+}
+
+.translation-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.close-btn{
+    float: right;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.translation-panel {
+  background: $bg-color;
+  color: $text-color;
+  max-width: 720px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  border-radius: 12px;
+  padding: 32px;
+  position: relative;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+
+  h2 {
+    font-size: 28px;
+    font-weight: normal;
+    color: $accent;
+    letter-spacing: 0.15em;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+}
+
+.translation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.translation-item {
+  .original {
+    font-family: 'Ma Shan Zheng', 'KaiTi', serif;
+    font-size: 18px;
+    line-height: 1.8;
+    color: $accent;
+    margin-bottom: 8px;
+  }
+
+  .translated {
+    font-size: 15px;
+    line-height: 1.7;
+    color: lighten($text-color, 15%);
+  }
 }
 </style>
