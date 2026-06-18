@@ -1,3 +1,0 @@
-import{_ as s,b as t,d as a,o}from"./index-fyA8vNKX.js";const n={link:"https://juejin.cn/post/7159380028417277966",cover:"https://iili.io/Jq64rOP.gif",info:`很早之前遇到的效果了，当时记得还在为自己搞得小程序登录背景发愁呢。突然发现了这个好看又简约的效果，所以便入手了。主要是根据一小块svg矢量图，然后通过背景重复实现的平铺，再加上背景尺寸和位置的改变，实现了动画效果。
-    如果你想改颜色，那建议你下载源地址svg，然后修改fill填充色，你也可以通过上传自己的图片实现效果。
-    `},i={class:"page app-content"};function c(l,e,r,_,d,p){return o(),t("div",i,e[0]||(e[0]=[a("h1",{class:"text","aria-label":"Thank you. Have a nice day!"},[a("span",{class:"heading","aria-hidden":"true"},[a("span",{class:"filled"},"Hello world!")])],-1)]))}const u=s(n,[["render",c],["__scopeId","data-v-694aabd5"]]);export{u as default};
