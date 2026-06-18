@@ -1,12 +1,14 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
+import { ArrowDown } from '@element-plus/icons-vue'
+import { ElMessage } from 'element-plus'
+import CodeCard from '@/components/CodeCard.vue'
 
 const baseUrl = import.meta.env.BASE_URL
 
 const preloaderHide = ref(false)
 
 const typewriterText = ref('')
-const showCursor = ref(true)
 
 const hoverClass = ref('')
 
@@ -48,6 +50,13 @@ const works = [
   }
 ]
 
+const contactInfo = {
+  phone: '17759795597',
+  email: 'jiangwen5945@gmail.com'
+}
+
+const timers = []
+
 const isMobile = ref(window.innerWidth < 768)
 const deviceType = computed(() => (isMobile.value ? 'app' : 'pc'))
 
@@ -60,30 +69,11 @@ const breakpointHandler = () => {
 }
 
 function showToast(msg) {
-  const el = document.createElement('div')
-  el.textContent = msg
-  Object.assign(el.style, {
-    position: 'fixed',
-    zIndex: '999999',
-    top: isMobile.value ? '10%' : '45%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    padding: '10px 24px',
-    borderRadius: '8px',
-    background: 'rgba(0,0,0,0.75)',
-    color: '#fff',
-    fontSize: '14px',
-    fontFamily: 'var(--font-primary, serif)',
-    whiteSpace: 'nowrap',
-    opacity: '0',
-    transition: 'opacity 0.3s ease'
+  ElMessage({
+    message: msg,
+    duration: 2500,
+    customClass: 'toast-message'
   })
-  document.body.appendChild(el)
-  requestAnimationFrame(() => { el.style.opacity = '1' })
-  setTimeout(() => {
-    el.style.opacity = '0'
-    setTimeout(() => el.remove(), 300)
-  }, 2500)
 }
 
 function handleWorkClick(item) {
@@ -103,12 +93,8 @@ const services = [
   { icon: 'Refresh', label: '优化与重构' }
 ]
 
-const scrolledPastThreshold = ref(false)
-
 let mouseMoveHandler = null
 let mouseLeaveHandler = null
-let scrollHandler = null
-let desktopScrollHandler = null
 let observer = null
 
 function smoothScroll(e, targetId) {
@@ -118,20 +104,22 @@ function smoothScroll(e, targetId) {
 }
 
 onMounted(() => {
-  setTimeout(() => {
+  if (document.readyState === 'complete') {
     preloaderHide.value = true
-  }, 100)
+  } else {
+    window.addEventListener('load', () => { preloaderHide.value = true }, { once: true })
+  }
 
-  setTimeout(() => {
+  timers.push(setTimeout(() => {
     document.querySelectorAll('#intro .animation-container').forEach((el) => {
       const delay = parseInt(el.getAttribute('data-animation-delay') || '0')
-      setTimeout(() => {
+      timers.push(setTimeout(() => {
         el.classList.add('run-animation')
-      }, 700 + delay)
+      }, 700 + delay))
     })
-  }, 700)
+  }, 700))
 
-  setTimeout(() => {
+  timers.push(setTimeout(() => {
     const lines = 
       [
         '从前我写代码，现在我描述代码',
@@ -141,23 +129,23 @@ onMounted(() => {
     let lineIdx = 0
     let charIdx = 0
 
-    function typeNext() {
+    const typeNext = () => {
       if (lineIdx >= lines.length) return
       if (charIdx < lines[lineIdx].length) {
         typewriterText.value += lines[lineIdx][charIdx]
         charIdx++
-        setTimeout(typeNext, 80 + Math.random() * 40)
+        timers.push(setTimeout(typeNext, 80 + Math.random() * 40))
       } else {
         if (lineIdx < lines.length - 1) {
           typewriterText.value += '<br>'
         }
         lineIdx++
         charIdx = 0
-        setTimeout(typeNext, 500)
+        timers.push(setTimeout(typeNext, 500))
       }
     }
     typeNext()
-  }, 1000)
+  }, 1000))
 
   const isDesktop = window.innerWidth >= 768
   if (isDesktop) {
@@ -169,26 +157,6 @@ onMounted(() => {
     }
     document.addEventListener('mousemove', mouseMoveHandler)
     document.documentElement.addEventListener('mouseleave', mouseLeaveHandler)
-
-    desktopScrollHandler = () => {
-      scrolledPastThreshold.value = window.scrollY > 200 && window.scrollY < 400
-    }
-    desktopScrollHandler()
-    window.addEventListener('scroll', desktopScrollHandler)
-  } else {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (!prefersReducedMotion) {
-      let ticking = false
-      scrollHandler = () => {
-        if (ticking) return
-        requestAnimationFrame(() => {
-          document.body.style.setProperty('--scroll', window.scrollY + 'px')
-          ticking = false
-        })
-        ticking = true
-      }
-      window.addEventListener('scroll', scrollHandler)
-    }
   }
 
   observer = new IntersectionObserver(
@@ -213,17 +181,12 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+  timers.forEach(clearTimeout)
   if (mouseMoveHandler) {
     document.removeEventListener('mousemove', mouseMoveHandler)
   }
   if (mouseLeaveHandler) {
     document.documentElement.removeEventListener('mouseleave', mouseLeaveHandler)
-  }
-  if (scrollHandler) {
-    window.removeEventListener('scroll', scrollHandler)
-  }
-  if (desktopScrollHandler) {
-    window.removeEventListener('scroll', desktopScrollHandler)
   }
   if (observer) {
     observer.disconnect()
@@ -246,22 +209,24 @@ onUnmounted(() => {
       <div class="content-area-inner">
         <section id="intro">
           <div class="container-mid">
-            <div class="animation-container animation-fade-down" data-animation-delay="0">
-              <h1>我是姜文</h1>
+            <div class="animation-container animation-fade-down" data-animation-delay="300">
+              <CodeCard/>
             </div>
             <div class="animation-container animation-fade-left" data-animation-delay="300">
               <p class="subline">
                 <span v-html="typewriterText"></span
-                ><span v-if="showCursor" class="typewriter-cursor">|</span>
+                ><span class="typewriter-cursor">|</span>
               </p>
             </div>
+
             <div class="animation-container animation-fade-up" data-animation-delay="600">
               <a
                 href="#work"
-                :class="['smooth-scroll', { 'scrolled-hover': scrolledPastThreshold }]"
                 @click="smoothScroll($event, '#work')"
+                class="btn-more"
               >
-                个人作品集<el-icon><ArrowDown /></el-icon>
+                个人作品集
+                <el-icon><ArrowDown /></el-icon>
               </a>
             </div>
           </div>
@@ -281,7 +246,7 @@ onUnmounted(() => {
           <h3 class="headline scroll-animated-from-right">我的作品</h3>
           <div class="showcase">
             <div v-for="item in works" :key="item.title" class="item scroll-animated-from-right">
-              <div :class="'work-link'" @click="handleWorkClick(item)">
+              <div class="work-link" @click="handleWorkClick(item)">
                 <div class="info">
                   <div class="container-mid">
                     <h5>{{ item.title }}</h5>
@@ -306,10 +271,10 @@ onUnmounted(() => {
           <h3 class="headline scroll-animated-from-right">联系我</h3>
           <ul class="contact-list">
             <li class="scroll-animated-from-right">
-              <el-icon><Iphone /></el-icon>17759795597
+              <el-icon><Iphone /></el-icon>{{ contactInfo.phone }}
             </li>
             <li class="scroll-animated-from-right">
-              <el-icon><Message /></el-icon>jiangwen5945@gmail.com
+              <el-icon><Message /></el-icon>{{ contactInfo.email }}
             </li>
           </ul>
         </section>
@@ -326,7 +291,7 @@ onUnmounted(() => {
   --color-white: #fff;
   --color-dark: #111;
   --color-overlay: #00000097;
-  margin: 0;
+  --fs-lg: min(5.333vw, 24px);
   font-family: var(--font-primary);
   font-weight: 300;
   color: var(--color-black);
@@ -344,32 +309,17 @@ onUnmounted(() => {
     color: var(--color-black);
   }
 
-  h1 {
-    font-size: min(9.6vw, 43.2px);
-  }
   h3 {
     font-size: min(7.467vw, 33.6px);
   }
   h5 {
-    font-size: min(5.333vw, 24px);
-  }
-
-  p {
-    font-size: min(4.8vw, 21.6px);
+    font-size: var(--fs-lg);
   }
 
   a,
   .work-link {
     cursor: pointer;
-    transition: all 300ms ease;
     text-decoration: none;
-
-    &:hover,
-    &:focus {
-      cursor: pointer;
-      transition: all 300ms ease;
-      text-decoration: none;
-    }
   }
 }
 
@@ -475,10 +425,16 @@ onUnmounted(() => {
 /* 介绍 */
 #intro {
   position: relative;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
   .container-mid {
     position: relative;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     p.subline {
       font-size: min(4vw, 24px);
@@ -498,37 +454,34 @@ onUnmounted(() => {
       }
     }
 
-    a {
-      font-size: min(5.867vw, 26.4px);
-      line-height: 2.92em;
-      position: relative;
-      display: inline-block;
-      padding: 0 2.6em;
-      transition: transform 0.2s ease 0.05s;
-      transform-origin: left center;
-      color: var(--color-white);
+    .btn-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--color-black);
+      font-size: 18px;
+      padding: 14px 40px;
+      border: 1px solid var(--color-black);
       border-radius: 100px;
-      background: var(--color-dark);
-
-      &.scrolled-hover, &:hover {
-        transform: rotate(15deg);
-      }
-
-      &::before {
-        position: absolute;
-        top: 45%;
-        left: min(5.333vw, 24px);
-        width: min(1.867vw, 8.4px);
-        height: min(1.867vw, 8.4px);
-        content: '';
-        border-radius: 100px;
-        background: #ffffff;
-        box-shadow: 0 0 4px;
-      }
+      background: transparent;
+      transition: all 0.3s ease;
 
       .el-icon {
-        font-size: 0.85em;
-        margin-left: 0.7em;
+        font-size: 16px;
+        transition: transform 0.3s ease;
+      }
+
+      &:hover {
+        background: var(--color-black);
+        color: var(--color-white);
+
+        .el-icon {
+          animation: btn-more-bounce 1s ease infinite;
+        }
+      }
+
+      &:active {
+        transform: scale(0.95);
       }
     }
   }
@@ -567,6 +520,7 @@ onUnmounted(() => {
       opacity: 1;
     }
   }
+
 }
 
 /* 打字机光标 */
@@ -594,7 +548,7 @@ onUnmounted(() => {
   list-style: none;
 
   li {
-    font-size: min(5.333vw, 24px);
+    font-size: var(--fs-lg);
     line-height: 3.4em;
     cursor: pointer;
     transition: transform 0.25s ease;
@@ -620,7 +574,7 @@ onUnmounted(() => {
       vertical-align: middle;
 
       .el-icon {
-        font-size: min(5.333vw, 24px);
+        font-size: var(--fs-lg);
         color: var(--color-white);
       }
     }
@@ -641,7 +595,7 @@ onUnmounted(() => {
   height: min(53.333vw, 240px);
   margin-bottom: 6vh;
   cursor: pointer;
-  border-radius: min(5.333vw, 24px);
+  border-radius: var(--fs-lg);
   background: var(--color-dark);
 
   &:last-child {
@@ -653,9 +607,10 @@ onUnmounted(() => {
     z-index: 100;
     top: 0;
     left: 0;
-    width: 0;
+    width: 100%;
     height: 100%;
-    transition: 0.25s ease;
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.25s ease;
     color: var(--color-white);
     background: var(--color-overlay);
 
@@ -686,7 +641,7 @@ onUnmounted(() => {
 
   &:hover {
     .info {
-      width: 100%;
+      clip-path: inset(0 0 0 0);
     }
 
     .info .container-mid h5 {
@@ -761,7 +716,7 @@ onUnmounted(() => {
   list-style: none;
 
   li {
-    font-size: min(5.333vw, 24px);
+    font-size: var(--fs-lg);
     line-height: 2.4em;
 
     .el-icon {
@@ -824,14 +779,6 @@ onUnmounted(() => {
       background: rgba(0, 0, 0, 0.6);
     }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      color: var(--color-white);
-    }
   }
 
   .image-container {
@@ -850,10 +797,10 @@ onUnmounted(() => {
       justify-content: center;
       background: rgba(0, 0, 0, 0.45);
       backdrop-filter: blur(4px);
-      border-radius: min(5.333vw, 24px);
+      border-radius: var(--fs-lg);
       margin-bottom: 4vh;
       min-height: auto;
-      padding: min(10.667vw, 48px) min(5.333vw, 24px);
+      padding: min(10.667vw, 48px) var(--fs-lg);
       border: 1px solid #2d2d2d;
       margin-top: 4vh;
       min-height: 30vh;
@@ -865,24 +812,31 @@ onUnmounted(() => {
   }
 
   #intro .container-mid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 60vh;
+
     p.subline {
       line-height: 1.6em;
       margin-top: 1.5em;
       margin-bottom: 1.8em;
     }
 
-    a {
-      line-height: 2.92em;
-      display: inline-flex;
-      align-items: center;
-      padding: 0 3.2em;
+    .btn-more {
+      padding: 12px 32px;
+      border-color: var(--color-white);
+      color: var(--color-white);
       font-size: 4vw;
+
+      &:hover {
+        background: var(--color-white);
+        color: var(--color-dark);
+      }
 
       &:active {
         transform: scale(0.95);
-      }
-      &.scrolled-hover, &:hover {
-        transform: rotate(0);
       }
     }
   }
@@ -930,8 +884,9 @@ onUnmounted(() => {
       bottom: 0;
       left: 0;
       width: 100%;
+      clip-path: none;
       background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, transparent 60%);
-      padding: min(5.333vw, 24px) min(5.333vw, 24px) min(4vw, 18px);
+      padding: var(--fs-lg) var(--fs-lg) min(4vw, 18px);
       box-sizing: border-box;
 
       .container-mid {
@@ -973,5 +928,18 @@ onUnmounted(() => {
       }
     }
   }
+}
+
+@keyframes btn-more-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+:global(.toast-message) {
+  background: rgba(0, 0, 0, 0.75) !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  font-family: var(--font-primary, serif) !important;
+  border: none !important;
 }
 </style>
