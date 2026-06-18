@@ -757,6 +757,10 @@ onUnmounted(() => {
   .home {
     color: var(--color-white);
 
+    h3 {
+      color: var(--color-white);
+    }
+
     &::before {
       content: '';
       position: fixed;
@@ -808,6 +812,7 @@ onUnmounted(() => {
 
     section h3.headline {
       margin-bottom: 1em;
+      margin-top: 0;
     }
   }
 
