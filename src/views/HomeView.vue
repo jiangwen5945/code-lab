@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
+import { useThrottleFn } from '@vueuse/core'
 import CodeCard from '@/components/CodeCard.vue'
 import IframeModal from '@/components/IframeModal.vue'
 
@@ -177,9 +178,9 @@ onMounted(() => {
 
   const isDesktop = window.innerWidth >= 768
   if (isDesktop) {
-    mouseMoveHandler = (e) => {
+    mouseMoveHandler = useThrottleFn((e) => {
       hoverClass.value = e.clientX >= window.innerWidth / 2 ? 'hover-right' : ''
-    }
+    }, 100)
     mouseLeaveHandler = () => {
       hoverClass.value = ''
     }
