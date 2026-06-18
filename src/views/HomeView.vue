@@ -6,6 +6,10 @@ const baseUrl = import.meta.env.BASE_URL
 
 const preloaderHide = ref(false)
 
+function openTerminal() {
+  window.open('https://jiangwen.site/terminal-portfolio/', '_blank')
+}
+
 const typewriterText = ref('')
 
 const hoverClass = ref('')
@@ -227,7 +231,7 @@ onUnmounted(() => {
       <div class="content-area-inner">
         <section id="intro">
           <div class="container-mid">
-            <div class="animation-container animation-fade-down" data-animation-delay="300">
+            <div class="animation-container animation-fade-down cursor-pointer" data-animation-delay="300" @click="openTerminal">
               <CodeCard/>
             </div>
             <div class="animation-container animation-fade-left" data-animation-delay="300">
@@ -511,6 +515,10 @@ onUnmounted(() => {
   display: flex;
   justify-content: center;
   width: 100%;
+
+  &.cursor-pointer {
+    cursor: pointer;
+  }
 
   &.animation-fade-up {
     transform: translateY(10vh);
